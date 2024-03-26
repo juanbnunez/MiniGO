@@ -46,6 +46,7 @@ RSAOP   : '>>=';  //Right shift assignment operator
 BCAOP   : '&^=';  //Bit clear (AND NOT) assignment operator
 RAOP    : '%=';   //Remainder assignment operator
 DAOP    : '/=';   //Division assignment operator
+DOT     : '.';    //DOT
 
 //Reserved words
 PACKAGE : 'package';
@@ -67,6 +68,7 @@ APPEND  : 'append';
 LEN     : 'len';
 CAP     : 'cap';
 PRINT   : 'print';
+PRINTLN : 'println';
 RETURN  : 'return';
 BREAK   : 'break';
 CONTINUE: 'continue';
@@ -90,5 +92,5 @@ fragment EscapedChar : '\\' [abfnrtv'"\\"];
 
 //Skiped elements
 LINE_COMMENT:   '//' ~[\r\n]* -> skip ;
-WS  :   [ \t\n\r]+ -> skip ;
+EPSILON  :   [ \t\n\r]+ -> skip ;
 
