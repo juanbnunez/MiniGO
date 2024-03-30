@@ -12,7 +12,7 @@ singleVarDecl :             identifierList declType ASOP expressionList
                             | identifierList ASOP expressionList
                             | singleVarDeclNoExps;
 singleVarDeclNoExps	:       identifierList declType;
-typeDecl :                  Type (singleTypeDecl SEMI | LP innerTypeDecls RP SEMI | LP RP SEMI);
+typeDecl :                  TYPE (singleTypeDecl SEMI | LP innerTypeDecls RP SEMI | LP RP SEMI);
 innerTypeDecls :            singleTypeDecl SEMI (singleTypeDecl SEMI)* ;
 singleTypeDecl :            ID declType;
 funcDecl :                  funcFrontDecl block SEMI;
