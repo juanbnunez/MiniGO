@@ -55,7 +55,7 @@ statementList :             statement* ;
 block :                     LCB statementList RCB;
 statement :                 PRINT LP expressionList | EPSILON RP SEMI
                             | PRINTLN LP expressionList | EPSILON RP SEMI
-                            | RETURN (EPSILON | EPSILON) SEMI
+                            | RETURN (expression | EPSILON) SEMI
                             | BREAK SEMI
                             | CONTINUE SEMI
                             | simpleStatement SEMI
@@ -90,5 +90,6 @@ expressionCaseClauseList :  EPSILON
 expressionCaseClause 	:   expressionSwitchCase COL statementList;
 expressionSwitchCase :      CASE expressionList
                             | DEFAULT;
-operator :                  MUL | DIV | MOD | LSH | RSH | AMPER | BC | PL | MIN | VB | CARET | EQ | NEQ | LT | LTE | GT | GTE | LAND | LOR | NEG | ASOP | AAOP | BAOP | SAOP | BOAOP | MAOP |BXOOP |LSAOP |RSAOP |BCAOP |RAOP |DAOP;
+operator :                  MUL | DIV | MOD | LSH | RSH | AMPER | BC | PL | MIN | VB | CARET | EQ | NEQ | LT | LTE | GT
+| GTE | LAND | LOR | NEG | ASOP | AAOP | BAOP | SAOP | BOAOP | MAOP |BXOOP |LSAOP |RSAOP |BCAOP |RAOP |DAOP;
 

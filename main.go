@@ -2,7 +2,7 @@ package main
 
 import (
 	parser "MiniGO/Compiler"
-	"bytes"
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -18,6 +18,7 @@ func main() {
 
 	// Textarea para el código
 	codeTextArea := widget.NewMultiLineEntry()
+	codeTextArea.SetPlaceHolder("Escribe tu código aquí")
 
 	// Botón de compilación
 	compileButton := widget.NewButton("Compilar", func() {
@@ -37,24 +38,24 @@ func main() {
 
 		// Mostrar errores en la ventana de errores
 		if len(errorListener.errors) > 0 {
-			var errorBuffer bytes.Buffer
+			var errorMessages []fyne.CanvasObject
 			for _, err := range errorListener.errors {
-				errorBuffer.WriteString(err + "\n")
+				errorMessages = append(errorMessages, widget.NewLabel(err))
 			}
 			errorWindowContent := container.NewVBox(
 				widget.NewLabel("Errores de compilación:"),
-				widget.NewLabel(errorBuffer.String()),
+				container.NewVScroll(container.NewVBox(errorMessages...)),
 			)
-			errorWindow.Resize(codeWindow.Canvas().Size()) // Establecer el tamaño de la ventana de errores
 			errorWindow.SetContent(errorWindowContent)
 			errorWindow.Show()
 		} else {
 			// Si no hay errores, limpiar la ventana de errores
 			errorWindow.Hide()
+			fmt.Println("Compilación exitosa.")
 		}
 	})
 
-	// Contenedor principal con BorderLayout
+	// Contenedor principal
 	mainContainer := fyne.NewContainerWithLayout(layout.NewBorderLayout(nil, compileButton, nil, nil),
 		codeTextArea,
 		compileButton,
@@ -72,6 +73,6 @@ type ErrorListener struct {
 }
 
 func (e *ErrorListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol interface{}, line, column int, msg string, ex antlr.RecognitionException) {
-	errorMessage := antlr.NewDefaultErrorStrategy().GetTokenErrorDisplay(offendingSymbol.(antlr.Token))
+	errorMessage := fmt.Sprintf("Error en línea %d, columna %d: %s", line, column, msg)
 	e.errors = append(e.errors, errorMessage)
 }

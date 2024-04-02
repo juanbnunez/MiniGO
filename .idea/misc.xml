@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ANTLRGenerationPreferences">
+    <option name="perGrammarGenerationSettings">
+      <list>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/Compiler/goScanner.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\nunez\OneDrive - Estudiantes ITCR\Documentos\TEC\2024\I Semestre 2024\Compiladores e interpretes\Proyectos\MiniGO\MiniGO\Compiler" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="Generated" />
+          <option name="language" value="Go" />
+          <option name="generateListener" value="false" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/Compiler/goParser.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\nunez\OneDrive - Estudiantes ITCR\Documentos\TEC\2024\I Semestre 2024\Compiladores e interpretes\Proyectos\MiniGO\MiniGO\Compiler" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="Generated" />
+          <option name="language" value="Go" />
+          <option name="generateListener" value="false" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+      </list>
+    </option>
+  </component>
+</project>
