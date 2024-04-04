@@ -1,0 +1,10 @@
+package main;
+
+func main() {
+    x = 10;
+    if x > 5 {
+        println("x es mayor que 5");
+    } else {
+        println("x es menor o igual que 5");
+    };
+};

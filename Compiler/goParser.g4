@@ -85,7 +85,7 @@ statementList :             statement*                                          
 block :                     LCB statementList RCB                                                                       #blockAST
                             ;
 statement :                 PRINT LP (expressionList | epsilon) RP SEMI                                                 #printSAST
-                            | PRINTLN LP (expressionList | epsilon) RP SEMI                                               #printlnSAST
+                            | PRINTLN LP (expressionList | epsilon) RP SEMI                                             #printlnSAST
                             | RETURN (expression | epsilon) SEMI                                                        #returnSAST
                             | BREAK SEMI                                                                                #breakSAST
                             | CONTINUE SEMI                                                                             #continueSAST

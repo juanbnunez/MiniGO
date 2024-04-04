@@ -25,9 +25,16 @@ For detailed information on the Mini GO grammar, refer to the "MiniGo Grammar.do
 ## Getting Started
 
 1. Clone the repository.
-2. Install ANTLR4 and any required dependencies.
-3. Follow the instructions in the project's documentation for building and running the Mini GO Compiler.
+2. Install GO 
+3. Install ANTLR4 and any required dependencies.
+4. Install Fyne (https://fyne.io/)
+5. Install a C compiler, recommended MSYS264 (https://www.msys2.org/)
+6. Use de CODE EXAMPLES in the Grammar documentation folder
+7. DISCLAIMER It is necessary to restart the application to test another code example (Feature to fix for future implementations)
 
 ## Documentation
 
 For detailed documentation on the language analysis, implementation details, test coverage, results, conclusions, and references, refer to the project's documentation files.
+
+## INSTITUTO TECNOLÓGICO DE COSTA RICA - ESCUELA DE INGENIERÍA EN COMPUTACIÓN
+## CURSO COMPILADORES E INTÉRPRETES 
