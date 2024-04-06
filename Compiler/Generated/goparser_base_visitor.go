@@ -1,4 +1,4 @@
-// Code generated from C:/Users/nunez/OneDrive - Estudiantes ITCR/Documentos/TEC/2024/I Semestre 2024/Compiladores e interpretes/Proyectos/MiniGO/MiniGO/Compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/Compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
 package Generated // goParser
 import "github.com/antlr4-go/antlr/v4"
@@ -7,166 +7,346 @@ type BasegoParserVisitor struct {
 	*antlr.BaseParseTreeVisitor
 }
 
-func (v *BasegoParserVisitor) VisitRoot(ctx *RootContext) interface{} {
+func (v *BasegoParserVisitor) VisitRootAST(ctx *RootASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitTopDeclarationList(ctx *TopDeclarationListContext) interface{} {
+func (v *BasegoParserVisitor) VisitTopDeclarationListAST(ctx *TopDeclarationListASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitVariableDecl(ctx *VariableDeclContext) interface{} {
+func (v *BasegoParserVisitor) VisitVarVDAST(ctx *VarVDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitInnerVarDecls(ctx *InnerVarDeclsContext) interface{} {
+func (v *BasegoParserVisitor) VisitInnerVarDeclsAST(ctx *InnerVarDeclsASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSingleVarDecl(ctx *SingleVarDeclContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdentifierListDTSVDAST(ctx *IdentifierListDTSVDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSingleVarDeclNoExps(ctx *SingleVarDeclNoExpsContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdentifierListSVDAST(ctx *IdentifierListSVDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitTypeDecl(ctx *TypeDeclContext) interface{} {
+func (v *BasegoParserVisitor) VisitSingleVarDAST(ctx *SingleVarDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitInnerTypeDecls(ctx *InnerTypeDeclsContext) interface{} {
+func (v *BasegoParserVisitor) VisitSingleVarDeclNoExpsAST(ctx *SingleVarDeclNoExpsASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSingleTypeDecl(ctx *SingleTypeDeclContext) interface{} {
+func (v *BasegoParserVisitor) VisitTypeTDAST(ctx *TypeTDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitFuncDecl(ctx *FuncDeclContext) interface{} {
+func (v *BasegoParserVisitor) VisitInnerTypeDeclsASt(ctx *InnerTypeDeclsAStContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitFuncFrontDecl(ctx *FuncFrontDeclContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdSYDAST(ctx *IdSYDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitFuncArgDecls(ctx *FuncArgDeclsContext) interface{} {
+func (v *BasegoParserVisitor) VisitFuncDeclAST(ctx *FuncDeclASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitDeclType(ctx *DeclTypeContext) interface{} {
+func (v *BasegoParserVisitor) VisitFuncFFDAST(ctx *FuncFFDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSliceDeclType(ctx *SliceDeclTypeContext) interface{} {
+func (v *BasegoParserVisitor) VisitFuncArgDeclsAST(ctx *FuncArgDeclsASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitArrayDeclType(ctx *ArrayDeclTypeContext) interface{} {
+func (v *BasegoParserVisitor) VisitLpDTAST(ctx *LpDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitStructDeclType(ctx *StructDeclTypeContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdDTAST(ctx *IdDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitStructMemDecls(ctx *StructMemDeclsContext) interface{} {
+func (v *BasegoParserVisitor) VisitSliceDeclTypeDTAST(ctx *SliceDeclTypeDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIdentifierList(ctx *IdentifierListContext) interface{} {
+func (v *BasegoParserVisitor) VisitArrayDeclTypeDTAST(ctx *ArrayDeclTypeDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpression(ctx *ExpressionContext) interface{} {
+func (v *BasegoParserVisitor) VisitDeclTypeAST(ctx *DeclTypeASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionList(ctx *ExpressionListContext) interface{} {
+func (v *BasegoParserVisitor) VisitLsbSDTAST(ctx *LsbSDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitPrimaryExpression(ctx *PrimaryExpressionContext) interface{} {
+func (v *BasegoParserVisitor) VisitLsbADTAST(ctx *LsbADTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitOperand(ctx *OperandContext) interface{} {
+func (v *BasegoParserVisitor) VisitStrctSDTAST(ctx *StrctSDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitLiteral(ctx *LiteralContext) interface{} {
+func (v *BasegoParserVisitor) VisitStructMemDeclsAST(ctx *StructMemDeclsASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIndex(ctx *IndexContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdentifierListAST(ctx *IdentifierListASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitArguments(ctx *ArgumentsContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpressionAST(ctx *ExpressionASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSelector(ctx *SelectorContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpressionEAST(ctx *ExpressionEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitAppendExpression(ctx *AppendExpressionContext) interface{} {
+func (v *BasegoParserVisitor) VisitPrimaryExpressionEAST(ctx *PrimaryExpressionEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitLengthExpression(ctx *LengthExpressionContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpressionListASt(ctx *ExpressionListAStContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitCapExpression(ctx *CapExpressionContext) interface{} {
+func (v *BasegoParserVisitor) VisitCapExpressionPEAST(ctx *CapExpressionPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitStatementList(ctx *StatementListContext) interface{} {
+func (v *BasegoParserVisitor) VisitPrimaryExpressionPEAST(ctx *PrimaryExpressionPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitBlock(ctx *BlockContext) interface{} {
+func (v *BasegoParserVisitor) VisitLengthExpressionPEAST(ctx *LengthExpressionPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitStatement(ctx *StatementContext) interface{} {
+func (v *BasegoParserVisitor) VisitAppendExpressionPEAST(ctx *AppendExpressionPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSimpleStatement(ctx *SimpleStatementContext) interface{} {
+func (v *BasegoParserVisitor) VisitOperandPEAST(ctx *OperandPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitAssignmentStatement(ctx *AssignmentStatementContext) interface{} {
+func (v *BasegoParserVisitor) VisitLiteralOAST(ctx *LiteralOASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIfStatement(ctx *IfStatementContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdOAST(ctx *IdOASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitLoop(ctx *LoopContext) interface{} {
+func (v *BasegoParserVisitor) VisitLpOAST(ctx *LpOASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitSwitch(ctx *SwitchContext) interface{} {
+func (v *BasegoParserVisitor) VisitIntliteralAST(ctx *IntliteralASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionCaseClauseList(ctx *ExpressionCaseClauseListContext) interface{} {
+func (v *BasegoParserVisitor) VisitFloatliteralAST(ctx *FloatliteralASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionCaseClause(ctx *ExpressionCaseClauseContext) interface{} {
+func (v *BasegoParserVisitor) VisitRunliteral(ctx *RunliteralContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionSwitchCase(ctx *ExpressionSwitchCaseContext) interface{} {
+func (v *BasegoParserVisitor) VisitRawsliteralAST(ctx *RawsliteralASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitInterpretedliteralAST(ctx *InterpretedliteralASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIdexAST(ctx *IdexASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitArgumentsAST(ctx *ArgumentsASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitSelectorAST(ctx *SelectorASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitAppendExpressionAST(ctx *AppendExpressionASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitLengthExpressionAST(ctx *LengthExpressionASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitCapExpressionAST(ctx *CapExpressionASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitStatementListAST(ctx *StatementListASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitBlockAST(ctx *BlockASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitPrintSAST(ctx *PrintSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitPrintlnSAST(ctx *PrintlnSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitReturnSAST(ctx *ReturnSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitBreakSAST(ctx *BreakSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitContinueSAST(ctx *ContinueSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitSimpleStatementSAST(ctx *SimpleStatementSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitBlockSAST(ctx *BlockSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitSwitchSAST(ctx *SwitchSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIfStatementSAST(ctx *IfStatementSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitLoopSAST(ctx *LoopSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitTypeDeclSAST(ctx *TypeDeclSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitVariableDeclSAST(ctx *VariableDeclSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitEpsilonSSAST(ctx *EpsilonSSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitExpressionSSAST(ctx *ExpressionSSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitAssignmentStatementSS(ctx *AssignmentStatementSSContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitExpressionListSS(ctx *ExpressionListSSContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitExpressionListASAST(ctx *ExpressionListASASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitExpressionASAST(ctx *ExpressionASASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIsExpressionBlockISAST(ctx *IsExpressionBlockISASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIsExpressionBlockIsISAST(ctx *IsExpressionBlockIsISASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIsSimpleStamentBlockISAST(ctx *IsSimpleStamentBlockISASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIsSimpleStamentExpressionBlockISAST(ctx *IsSimpleStamentExpressionBlockISASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIsSimpleStamentExpressionBlockifSAST(ctx *IsSimpleStamentExpressionBlockifSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitIsSimpleStamentExpressionBlockBlockAST(ctx *IsSimpleStamentExpressionBlockBlockASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitFBlockLAST(ctx *FBlockLASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitFExpressionBlockLAST(ctx *FExpressionBlockLASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitFSimpleStatementLAST(ctx *FSimpleStatementLASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitSSimpleStatSAST(ctx *SSimpleStatSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitSExpressionSAST(ctx *SExpressionSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitSBlockSAST(ctx *SBlockSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitEpsilonECCLAST(ctx *EpsilonECCLASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitExpressionCaseClauseECCLAST(ctx *ExpressionCaseClauseECCLASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitExpressionSwitchCaseECCAST(ctx *ExpressionSwitchCaseECCASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitCaseESCAST(ctx *CaseESCASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitDefaultESCAST(ctx *DefaultESCASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BasegoParserVisitor) VisitOperator(ctx *OperatorContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitEpsilonAST(ctx *EpsilonASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }

@@ -1,4 +1,4 @@
-// Code generated from C:/Users/nunez/OneDrive - Estudiantes ITCR/Documentos/TEC/2024/I Semestre 2024/Compiladores e interpretes/Proyectos/MiniGO/MiniGO/Compiler/goScanner.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/Compiler/goScanner.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
 package Generated
 

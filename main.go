@@ -1,7 +1,7 @@
 package main
 
 import (
-	parser "MiniGO/Compiler"
+	parser "MiniGO/Compiler/Generated"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
