@@ -1,6 +1,6 @@
-// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/Compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
-package Generated // goParser
+package generated // goParser
 import "github.com/antlr4-go/antlr/v4"
 
 type BasegoParserVisitor struct {
@@ -23,11 +23,11 @@ func (v *BasegoParserVisitor) VisitInnerVarDeclsAST(ctx *InnerVarDeclsASTContext
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIdentifierListDTSVDAST(ctx *IdentifierListDTSVDASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdListDTSVDAST(ctx *IdListDTSVDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIdentifierListSVDAST(ctx *IdentifierListSVDASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIdListSVDAST(ctx *IdListSVDASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -43,7 +43,7 @@ func (v *BasegoParserVisitor) VisitTypeTDAST(ctx *TypeTDASTContext) interface{} 
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitInnerTypeDeclsASt(ctx *InnerTypeDeclsAStContext) interface{} {
+func (v *BasegoParserVisitor) VisitInnerTypeDeclsAST(ctx *InnerTypeDeclsASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -79,7 +79,7 @@ func (v *BasegoParserVisitor) VisitArrayDeclTypeDTAST(ctx *ArrayDeclTypeDTASTCon
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitDeclTypeAST(ctx *DeclTypeASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitStructDeclTypeDTAST(ctx *StructDeclTypeDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -91,7 +91,7 @@ func (v *BasegoParserVisitor) VisitLsbADTAST(ctx *LsbADTASTContext) interface{} 
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitStrctSDTAST(ctx *StrctSDTASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitStructSDTAST(ctx *StructSDTASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -103,10 +103,6 @@ func (v *BasegoParserVisitor) VisitIdentifierListAST(ctx *IdentifierListASTConte
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionAST(ctx *ExpressionASTContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BasegoParserVisitor) VisitExpressionEAST(ctx *ExpressionEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -115,27 +111,31 @@ func (v *BasegoParserVisitor) VisitPrimaryExpressionEAST(ctx *PrimaryExpressionE
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionListASt(ctx *ExpressionListAStContext) interface{} {
+func (v *BasegoParserVisitor) VisitOperatorEAST(ctx *OperatorEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitCapExpressionPEAST(ctx *CapExpressionPEASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpressionListAST(ctx *ExpressionListASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitPrimaryExpressionPEAST(ctx *PrimaryExpressionPEASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitLengthExpPEAST(ctx *LengthExpPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitLengthExpressionPEAST(ctx *LengthExpressionPEASTContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BasegoParserVisitor) VisitAppendExpressionPEAST(ctx *AppendExpressionPEASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitAppendExpPEAST(ctx *AppendExpPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BasegoParserVisitor) VisitOperandPEAST(ctx *OperandPEASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitPrimaryExpPEAST(ctx *PrimaryExpPEASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitCapExpPEAST(ctx *CapExpPEASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -147,7 +147,7 @@ func (v *BasegoParserVisitor) VisitIdOAST(ctx *IdOASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitLpOAST(ctx *LpOASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpressionOAST(ctx *ExpressionOASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -159,7 +159,7 @@ func (v *BasegoParserVisitor) VisitFloatliteralAST(ctx *FloatliteralASTContext) 
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitRunliteral(ctx *RunliteralContext) interface{} {
+func (v *BasegoParserVisitor) VisitRunliteralAST(ctx *RunliteralASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -259,19 +259,19 @@ func (v *BasegoParserVisitor) VisitExpressionSSAST(ctx *ExpressionSSASTContext) 
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitAssignmentStatementSS(ctx *AssignmentStatementSSContext) interface{} {
+func (v *BasegoParserVisitor) VisitAssigmentStatementSSAST(ctx *AssigmentStatementSSASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionListSS(ctx *ExpressionListSSContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpListSSAST(ctx *ExpListSSASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionListASAST(ctx *ExpressionListASASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpListASAST(ctx *ExpListASASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionASAST(ctx *ExpressionASASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpASAST(ctx *ExpASASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -279,23 +279,23 @@ func (v *BasegoParserVisitor) VisitIsExpressionBlockISAST(ctx *IsExpressionBlock
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIsExpressionBlockIsISAST(ctx *IsExpressionBlockIsISASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIsExpBlockIsISAST(ctx *IsExpBlockIsISASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIsSimpleStamentBlockISAST(ctx *IsSimpleStamentBlockISASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIsExpBlockISAST(ctx *IsExpBlockISASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIsSimpleStamentExpressionBlockISAST(ctx *IsSimpleStamentExpressionBlockISASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIsSSExpBlockISAST(ctx *IsSSExpBlockISASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIsSimpleStamentExpressionBlockifSAST(ctx *IsSimpleStamentExpressionBlockifSASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIsSSExpBlockifSAST(ctx *IsSSExpBlockifSASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitIsSimpleStamentExpressionBlockBlockAST(ctx *IsSimpleStamentExpressionBlockBlockASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitIsSSExpBlockBlockAST(ctx *IsSSExpBlockBlockASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -303,11 +303,15 @@ func (v *BasegoParserVisitor) VisitFBlockLAST(ctx *FBlockLASTContext) interface{
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitFExpressionBlockLAST(ctx *FExpressionBlockLASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitFExpBlockLAST(ctx *FExpBlockLASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitFSimpleStatementLAST(ctx *FSimpleStatementLASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitFSimpStateExpSBlockLAST(ctx *FSimpStateExpSBlockLASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BasegoParserVisitor) VisitFSimpStateSimpStateBlockLAST(ctx *FSimpStateSimpStateBlockLASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -319,6 +323,10 @@ func (v *BasegoParserVisitor) VisitSExpressionSAST(ctx *SExpressionSASTContext) 
 	return v.VisitChildren(ctx)
 }
 
+func (v *BasegoParserVisitor) VisitSSimpleStatExpCCListSAST(ctx *SSimpleStatExpCCListSASTContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BasegoParserVisitor) VisitSBlockSAST(ctx *SBlockSASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -327,11 +335,11 @@ func (v *BasegoParserVisitor) VisitEpsilonECCLAST(ctx *EpsilonECCLASTContext) in
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionCaseClauseECCLAST(ctx *ExpressionCaseClauseECCLASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpCaseClauseECCLAST(ctx *ExpCaseClauseECCLASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BasegoParserVisitor) VisitExpressionSwitchCaseECCAST(ctx *ExpressionSwitchCaseECCASTContext) interface{} {
+func (v *BasegoParserVisitor) VisitExpSwitchCaseECCAST(ctx *ExpSwitchCaseECCASTContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

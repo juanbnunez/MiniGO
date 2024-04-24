@@ -1,7 +1,64 @@
 package main
 
+/*
 import (
-	parser "MiniGO/Compiler/Generated"
+	"MiniGO/checker"
+	parser "MiniGO/compiler/generated"
+	"errors"
+	"fmt"
+	"github.com/antlr4-go/antlr/v4"
+
+	"os"
+)*/
+
+import (
+	"MiniGO/checker"
+	"MiniGO/compiler"
+	generated "MiniGO/compiler/generated"
+	"fmt"
+	"github.com/antlr4-go/antlr/v4"
+)
+
+func main() {
+
+	archivo := "Prueba.txt"
+
+	// Input string to tokenize
+	input, _ := antlr.NewFileStream( /*os.Args[1]*/ archivo)
+
+	// Create the lexer and stream
+	lexer := generated.NewgoScanner(input)
+	stream := antlr.NewCommonTokenStream(lexer, 0)
+	p := generated.NewgoParser(stream)
+
+	errorListener := compiler.NewMyErrorListener()
+	p.RemoveErrorListeners()
+	p.AddErrorListener(errorListener)
+	lexer.RemoveErrorListeners()
+	lexer.AddErrorListener(errorListener)
+
+	tree := p.Root()
+
+	myChecker := checker.NewTypeChecker()
+	myChecker.Visit(tree)
+	//tree.Accept(myChecker)
+
+	if len(errorListener.ErrorMsgs) > 0 {
+		fmt.Println("Errores encontrados de sintaxis:")
+		for _, errMsg := range errorListener.ErrorMsgs {
+			fmt.Println(errMsg)
+		}
+	} else {
+		fmt.Println("Compilación terminada sin errores")
+	}
+
+	fmt.Println("Compilación terminada")
+
+}
+
+/*
+import (
+	parser "MiniGO/compiler/generated"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -75,4 +132,4 @@ type ErrorListener struct {
 func (e *ErrorListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol interface{}, line, column int, msg string, ex antlr.RecognitionException) {
 	errorMessage := fmt.Sprintf("Error en línea %d, columna %d: %s", line, column, msg)
 	e.errors = append(e.errors, errorMessage)
-}
+}*/

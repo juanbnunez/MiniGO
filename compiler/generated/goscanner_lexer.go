@@ -1,6 +1,6 @@
-// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/Compiler/goScanner.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/compiler/goScanner.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
-package Generated
+package generated
 
 import (
 	"fmt"

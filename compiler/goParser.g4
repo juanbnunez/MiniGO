@@ -12,15 +12,15 @@ variableDecl :              VAR (singleVarDecl SEMI | LP innerVarDecls RP SEMI |
                             ;
 innerVarDecls :             singleVarDecl SEMI (singleVarDecl SEMI)*                                                    #innerVarDeclsAST
                             ;
-singleVarDecl :             identifierList declType ASOP expressionList                                                 #identifierListDTSVDAST
-                            | identifierList ASOP expressionList                                                        #identifierListSVDAST
+singleVarDecl :             identifierList declType ASOP expressionList                                                 #idListDTSVDAST
+                            | identifierList ASOP expressionList                                                        #idListSVDAST
                             | singleVarDeclNoExps                                                                       #singleVarDAST
                             ;
 singleVarDeclNoExps	:       identifierList declType                                                                     #singleVarDeclNoExpsAST
                             ;
 typeDecl :                  TYPE (singleTypeDecl SEMI | LP innerTypeDecls RP SEMI | LP RP SEMI)                         #typeTDAST
                             ;
-innerTypeDecls :            singleTypeDecl SEMI (singleTypeDecl SEMI)*                                                  #innerTypeDeclsASt
+innerTypeDecls :            singleTypeDecl SEMI (singleTypeDecl SEMI)*                                                  #innerTypeDeclsAST
                             ;
 singleTypeDecl :            ID declType                                                                                 #idSYDAST
                             ;
@@ -34,13 +34,13 @@ declType :                  LP declType RP                                      
                             | ID                                                                                        #idDTAST
                             | sliceDeclType                                                                             #sliceDeclTypeDTAST
                             | arrayDeclType                                                                             #arrayDeclTypeDTAST
-                            | structDeclType                                                                            #declTypeAST
+                            | structDeclType                                                                            #structDeclTypeDTAST
                             ;
 sliceDeclType :             LSB RSB declType                                                                            #lsbSDTAST
                             ;
 arrayDeclType :             LSB INTLITERAL RSB declType                                                                 #lsbADTAST
                             ;
-structDeclType :            STRUCT LCB (structMemDecls|epsilon) RCB                                                     #strctSDTAST
+structDeclType :            STRUCT LCB (structMemDecls|epsilon) RCB                                                     #structSDTAST
                             ;
 structMemDecls :            singleVarDeclNoExps SEMI (singleVarDeclNoExps SEMI)*                                        #structMemDeclsAST
                             ;
@@ -48,23 +48,23 @@ identifierList :            ID (CM ID)*                                         
                             ;
 expression :                primaryExpression                                                                           #primaryExpressionEAST
                             | expression operator expression                                                            #expressionEAST
-                            | operator expression                                                                       #expressionAST
+                            | operator expression                                                                       #operatorEAST
                             ;
-expressionList :            expression (CM expression)*                                                                 #expressionListASt
+expressionList :            expression (CM expression)*                                                                 #expressionListAST
                             ;
 primaryExpression :         operand                                                                                     #operandPEAST
-                            | primaryExpression (selector | index | arguments )                                         #primaryExpressionPEAST
-                            | appendExpression                                                                          #appendExpressionPEAST
-                            | lengthExpression                                                                          #lengthExpressionPEAST
-                            | capExpression                                                                             #capExpressionPEAST
+                            | primaryExpression (selector | index | arguments )                                         #primaryExpPEAST
+                            | appendExpression                                                                          #appendExpPEAST
+                            | lengthExpression                                                                          #lengthExpPEAST
+                            | capExpression                                                                             #capExpPEAST
                             ;
 operand :                   literal                                                                                     #literalOAST
                             | ID                                                                                        #idOAST
-                            | LP expression RP                                                                          #lpOAST
+                            | LP expression RP                                                                          #expressionOAST
                             ;
 literal :                   INTLITERAL                                                                                  #intliteralAST
                             | FLOATLITERAL                                                                              #floatliteralAST
-                            | RUNELITERAL                                                                               #runliteral
+                            | RUNELITERAL                                                                               #runliteralAST
                             | RAWSTRINGLITERAL                                                                          #rawsliteralAST
                             | INTERPRETEDSTRINGLITERAL                                                                  #interpretedliteralAST
                             ;
@@ -99,33 +99,33 @@ statement :                 PRINT LP (expressionList | epsilon) RP SEMI         
                             ;
 simpleStatement	:           epsilon                                                                                     #epsilonSSAST
                             | expression (INC | DEC | epsilon)                                                          #expressionSSAST
-                            | assignmentStatement                                                                       #assignmentStatementSS
-                            | expressionList SVD expressionList                                                         #expressionListSS
+                            | assignmentStatement                                                                       #assigmentStatementSSAST
+                            | expressionList SVD expressionList                                                         #expListSSAST
                             ;
-assignmentStatement :       expressionList operator expressionList                                                      #expressionListASAST
-                            |expression operator  expression                                                            #expressionASAST
+assignmentStatement :       expressionList operator expressionList                                                      #expListASAST
+                            |expression operator  expression                                                            #expASAST
                             ;
 ifStatement :               IF expression block                                                                         #isExpressionBlockISAST
-                            | IF expression block ELSE ifStatement                                                      #isExpressionBlockIsISAST
-                            | IF expression block ELSE block                                                            #isSimpleStamentBlockISAST
-                            | IF simpleStatement  SEMI expression block                                                 #isSimpleStamentExpressionBlockISAST
-                            | IF simpleStatement SEMI  expression block ELSE ifStatement                                #isSimpleStamentExpressionBlockifSAST
-                            | IF simpleStatement  SEMI expression block ELSE block                                      #isSimpleStamentExpressionBlockBlockAST
+                            | IF expression block ELSE ifStatement                                                      #isExpBlockIsISAST
+                            | IF expression block ELSE block                                                            #isExpBlockISAST
+                            | IF simpleStatement  SEMI expression block                                                 #isSSExpBlockISAST
+                            | IF simpleStatement SEMI  expression block ELSE ifStatement                                #isSSExpBlockifSAST
+                            | IF simpleStatement  SEMI expression block ELSE block                                      #isSSExpBlockBlockAST
                             ;
 loop :                      FOR block                                                                                   #fBlockLAST
-                            | FOR expression block                                                                      #fExpressionBlockLAST
-                            | FOR simpleStatement SEMI expression SEMI simpleStatement block                            #fSimpleStatementLAST
-                            | FOR simpleStatement SEMI SEMI simpleStatement block                                       #fSimpleStatementLAST
+                            | FOR expression block                                                                      #fExpBlockLAST
+                            | FOR simpleStatement SEMI expression SEMI simpleStatement block                            #fSimpStateExpSBlockLAST
+                            | FOR simpleStatement SEMI SEMI simpleStatement block                                       #fSimpStateSimpStateBlockLAST
                             ;
 switch :                    SWITCH simpleStatement SEMI expression LCB expressionCaseClauseList RCB                     #sSimpleStatSAST
                             | SWITCH expression LCB expressionCaseClauseList RCB                                        #sExpressionSAST
-                            | SWITCH simpleStatement SEMI LCB expressionCaseClauseList RCB                              #sSimpleStatSAST
+                            | SWITCH simpleStatement SEMI LCB expressionCaseClauseList RCB                              #sSimpleStatExpCCListSAST
                             | SWITCH LCB expressionCaseClauseList RCB                                                   #sBlockSAST
                             ;
 expressionCaseClauseList :  epsilon                                                                                     #epsilonECCLAST
-                            | expressionCaseClause expressionCaseClauseList                                             #expressionCaseClauseECCLAST
+                            | expressionCaseClause expressionCaseClauseList                                             #expCaseClauseECCLAST
                             ;
-expressionCaseClause 	:   expressionSwitchCase COL statementList                                                      #expressionSwitchCaseECCAST
+expressionCaseClause 	:   expressionSwitchCase COL statementList                                                      #expSwitchCaseECCAST
                             ;
 expressionSwitchCase :      CASE expressionList                                                                         #caseESCAST
                             | DEFAULT                                                                                   #defaultESCAST

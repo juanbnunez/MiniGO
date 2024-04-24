@@ -1,6 +1,6 @@
-// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/Compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from D:/Tec/Compi/MiniGo1/MiniGO/compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
-package Generated // goParser
+package generated // goParser
 import "github.com/antlr4-go/antlr/v4"
 
 // goParserListener is a complete listener for a parse tree produced by goParser.
@@ -19,11 +19,11 @@ type goParserListener interface {
 	// EnterInnerVarDeclsAST is called when entering the innerVarDeclsAST production.
 	EnterInnerVarDeclsAST(c *InnerVarDeclsASTContext)
 
-	// EnterIdentifierListDTSVDAST is called when entering the identifierListDTSVDAST production.
-	EnterIdentifierListDTSVDAST(c *IdentifierListDTSVDASTContext)
+	// EnterIdListDTSVDAST is called when entering the idListDTSVDAST production.
+	EnterIdListDTSVDAST(c *IdListDTSVDASTContext)
 
-	// EnterIdentifierListSVDAST is called when entering the identifierListSVDAST production.
-	EnterIdentifierListSVDAST(c *IdentifierListSVDASTContext)
+	// EnterIdListSVDAST is called when entering the idListSVDAST production.
+	EnterIdListSVDAST(c *IdListSVDASTContext)
 
 	// EnterSingleVarDAST is called when entering the singleVarDAST production.
 	EnterSingleVarDAST(c *SingleVarDASTContext)
@@ -34,8 +34,8 @@ type goParserListener interface {
 	// EnterTypeTDAST is called when entering the typeTDAST production.
 	EnterTypeTDAST(c *TypeTDASTContext)
 
-	// EnterInnerTypeDeclsASt is called when entering the innerTypeDeclsASt production.
-	EnterInnerTypeDeclsASt(c *InnerTypeDeclsAStContext)
+	// EnterInnerTypeDeclsAST is called when entering the innerTypeDeclsAST production.
+	EnterInnerTypeDeclsAST(c *InnerTypeDeclsASTContext)
 
 	// EnterIdSYDAST is called when entering the idSYDAST production.
 	EnterIdSYDAST(c *IdSYDASTContext)
@@ -61,8 +61,8 @@ type goParserListener interface {
 	// EnterArrayDeclTypeDTAST is called when entering the arrayDeclTypeDTAST production.
 	EnterArrayDeclTypeDTAST(c *ArrayDeclTypeDTASTContext)
 
-	// EnterDeclTypeAST is called when entering the declTypeAST production.
-	EnterDeclTypeAST(c *DeclTypeASTContext)
+	// EnterStructDeclTypeDTAST is called when entering the structDeclTypeDTAST production.
+	EnterStructDeclTypeDTAST(c *StructDeclTypeDTASTContext)
 
 	// EnterLsbSDTAST is called when entering the lsbSDTAST production.
 	EnterLsbSDTAST(c *LsbSDTASTContext)
@@ -70,8 +70,8 @@ type goParserListener interface {
 	// EnterLsbADTAST is called when entering the lsbADTAST production.
 	EnterLsbADTAST(c *LsbADTASTContext)
 
-	// EnterStrctSDTAST is called when entering the strctSDTAST production.
-	EnterStrctSDTAST(c *StrctSDTASTContext)
+	// EnterStructSDTAST is called when entering the structSDTAST production.
+	EnterStructSDTAST(c *StructSDTASTContext)
 
 	// EnterStructMemDeclsAST is called when entering the structMemDeclsAST production.
 	EnterStructMemDeclsAST(c *StructMemDeclsASTContext)
@@ -79,32 +79,32 @@ type goParserListener interface {
 	// EnterIdentifierListAST is called when entering the identifierListAST production.
 	EnterIdentifierListAST(c *IdentifierListASTContext)
 
-	// EnterExpressionAST is called when entering the expressionAST production.
-	EnterExpressionAST(c *ExpressionASTContext)
-
 	// EnterExpressionEAST is called when entering the expressionEAST production.
 	EnterExpressionEAST(c *ExpressionEASTContext)
 
 	// EnterPrimaryExpressionEAST is called when entering the primaryExpressionEAST production.
 	EnterPrimaryExpressionEAST(c *PrimaryExpressionEASTContext)
 
-	// EnterExpressionListASt is called when entering the expressionListASt production.
-	EnterExpressionListASt(c *ExpressionListAStContext)
+	// EnterOperatorEAST is called when entering the operatorEAST production.
+	EnterOperatorEAST(c *OperatorEASTContext)
 
-	// EnterCapExpressionPEAST is called when entering the capExpressionPEAST production.
-	EnterCapExpressionPEAST(c *CapExpressionPEASTContext)
+	// EnterExpressionListAST is called when entering the expressionListAST production.
+	EnterExpressionListAST(c *ExpressionListASTContext)
 
-	// EnterPrimaryExpressionPEAST is called when entering the primaryExpressionPEAST production.
-	EnterPrimaryExpressionPEAST(c *PrimaryExpressionPEASTContext)
+	// EnterLengthExpPEAST is called when entering the lengthExpPEAST production.
+	EnterLengthExpPEAST(c *LengthExpPEASTContext)
 
-	// EnterLengthExpressionPEAST is called when entering the lengthExpressionPEAST production.
-	EnterLengthExpressionPEAST(c *LengthExpressionPEASTContext)
-
-	// EnterAppendExpressionPEAST is called when entering the appendExpressionPEAST production.
-	EnterAppendExpressionPEAST(c *AppendExpressionPEASTContext)
+	// EnterAppendExpPEAST is called when entering the appendExpPEAST production.
+	EnterAppendExpPEAST(c *AppendExpPEASTContext)
 
 	// EnterOperandPEAST is called when entering the operandPEAST production.
 	EnterOperandPEAST(c *OperandPEASTContext)
+
+	// EnterPrimaryExpPEAST is called when entering the primaryExpPEAST production.
+	EnterPrimaryExpPEAST(c *PrimaryExpPEASTContext)
+
+	// EnterCapExpPEAST is called when entering the capExpPEAST production.
+	EnterCapExpPEAST(c *CapExpPEASTContext)
 
 	// EnterLiteralOAST is called when entering the literalOAST production.
 	EnterLiteralOAST(c *LiteralOASTContext)
@@ -112,8 +112,8 @@ type goParserListener interface {
 	// EnterIdOAST is called when entering the idOAST production.
 	EnterIdOAST(c *IdOASTContext)
 
-	// EnterLpOAST is called when entering the lpOAST production.
-	EnterLpOAST(c *LpOASTContext)
+	// EnterExpressionOAST is called when entering the expressionOAST production.
+	EnterExpressionOAST(c *ExpressionOASTContext)
 
 	// EnterIntliteralAST is called when entering the intliteralAST production.
 	EnterIntliteralAST(c *IntliteralASTContext)
@@ -121,8 +121,8 @@ type goParserListener interface {
 	// EnterFloatliteralAST is called when entering the floatliteralAST production.
 	EnterFloatliteralAST(c *FloatliteralASTContext)
 
-	// EnterRunliteral is called when entering the runliteral production.
-	EnterRunliteral(c *RunliteralContext)
+	// EnterRunliteralAST is called when entering the runliteralAST production.
+	EnterRunliteralAST(c *RunliteralASTContext)
 
 	// EnterRawsliteralAST is called when entering the rawsliteralAST production.
 	EnterRawsliteralAST(c *RawsliteralASTContext)
@@ -196,44 +196,47 @@ type goParserListener interface {
 	// EnterExpressionSSAST is called when entering the expressionSSAST production.
 	EnterExpressionSSAST(c *ExpressionSSASTContext)
 
-	// EnterAssignmentStatementSS is called when entering the assignmentStatementSS production.
-	EnterAssignmentStatementSS(c *AssignmentStatementSSContext)
+	// EnterAssigmentStatementSSAST is called when entering the assigmentStatementSSAST production.
+	EnterAssigmentStatementSSAST(c *AssigmentStatementSSASTContext)
 
-	// EnterExpressionListSS is called when entering the expressionListSS production.
-	EnterExpressionListSS(c *ExpressionListSSContext)
+	// EnterExpListSSAST is called when entering the expListSSAST production.
+	EnterExpListSSAST(c *ExpListSSASTContext)
 
-	// EnterExpressionListASAST is called when entering the expressionListASAST production.
-	EnterExpressionListASAST(c *ExpressionListASASTContext)
+	// EnterExpListASAST is called when entering the expListASAST production.
+	EnterExpListASAST(c *ExpListASASTContext)
 
-	// EnterExpressionASAST is called when entering the expressionASAST production.
-	EnterExpressionASAST(c *ExpressionASASTContext)
+	// EnterExpASAST is called when entering the expASAST production.
+	EnterExpASAST(c *ExpASASTContext)
 
 	// EnterIsExpressionBlockISAST is called when entering the isExpressionBlockISAST production.
 	EnterIsExpressionBlockISAST(c *IsExpressionBlockISASTContext)
 
-	// EnterIsExpressionBlockIsISAST is called when entering the isExpressionBlockIsISAST production.
-	EnterIsExpressionBlockIsISAST(c *IsExpressionBlockIsISASTContext)
+	// EnterIsExpBlockIsISAST is called when entering the isExpBlockIsISAST production.
+	EnterIsExpBlockIsISAST(c *IsExpBlockIsISASTContext)
 
-	// EnterIsSimpleStamentBlockISAST is called when entering the isSimpleStamentBlockISAST production.
-	EnterIsSimpleStamentBlockISAST(c *IsSimpleStamentBlockISASTContext)
+	// EnterIsExpBlockISAST is called when entering the isExpBlockISAST production.
+	EnterIsExpBlockISAST(c *IsExpBlockISASTContext)
 
-	// EnterIsSimpleStamentExpressionBlockISAST is called when entering the isSimpleStamentExpressionBlockISAST production.
-	EnterIsSimpleStamentExpressionBlockISAST(c *IsSimpleStamentExpressionBlockISASTContext)
+	// EnterIsSSExpBlockISAST is called when entering the isSSExpBlockISAST production.
+	EnterIsSSExpBlockISAST(c *IsSSExpBlockISASTContext)
 
-	// EnterIsSimpleStamentExpressionBlockifSAST is called when entering the isSimpleStamentExpressionBlockifSAST production.
-	EnterIsSimpleStamentExpressionBlockifSAST(c *IsSimpleStamentExpressionBlockifSASTContext)
+	// EnterIsSSExpBlockifSAST is called when entering the isSSExpBlockifSAST production.
+	EnterIsSSExpBlockifSAST(c *IsSSExpBlockifSASTContext)
 
-	// EnterIsSimpleStamentExpressionBlockBlockAST is called when entering the isSimpleStamentExpressionBlockBlockAST production.
-	EnterIsSimpleStamentExpressionBlockBlockAST(c *IsSimpleStamentExpressionBlockBlockASTContext)
+	// EnterIsSSExpBlockBlockAST is called when entering the isSSExpBlockBlockAST production.
+	EnterIsSSExpBlockBlockAST(c *IsSSExpBlockBlockASTContext)
 
 	// EnterFBlockLAST is called when entering the fBlockLAST production.
 	EnterFBlockLAST(c *FBlockLASTContext)
 
-	// EnterFExpressionBlockLAST is called when entering the fExpressionBlockLAST production.
-	EnterFExpressionBlockLAST(c *FExpressionBlockLASTContext)
+	// EnterFExpBlockLAST is called when entering the fExpBlockLAST production.
+	EnterFExpBlockLAST(c *FExpBlockLASTContext)
 
-	// EnterFSimpleStatementLAST is called when entering the fSimpleStatementLAST production.
-	EnterFSimpleStatementLAST(c *FSimpleStatementLASTContext)
+	// EnterFSimpStateExpSBlockLAST is called when entering the fSimpStateExpSBlockLAST production.
+	EnterFSimpStateExpSBlockLAST(c *FSimpStateExpSBlockLASTContext)
+
+	// EnterFSimpStateSimpStateBlockLAST is called when entering the fSimpStateSimpStateBlockLAST production.
+	EnterFSimpStateSimpStateBlockLAST(c *FSimpStateSimpStateBlockLASTContext)
 
 	// EnterSSimpleStatSAST is called when entering the sSimpleStatSAST production.
 	EnterSSimpleStatSAST(c *SSimpleStatSASTContext)
@@ -241,17 +244,20 @@ type goParserListener interface {
 	// EnterSExpressionSAST is called when entering the sExpressionSAST production.
 	EnterSExpressionSAST(c *SExpressionSASTContext)
 
+	// EnterSSimpleStatExpCCListSAST is called when entering the sSimpleStatExpCCListSAST production.
+	EnterSSimpleStatExpCCListSAST(c *SSimpleStatExpCCListSASTContext)
+
 	// EnterSBlockSAST is called when entering the sBlockSAST production.
 	EnterSBlockSAST(c *SBlockSASTContext)
 
 	// EnterEpsilonECCLAST is called when entering the epsilonECCLAST production.
 	EnterEpsilonECCLAST(c *EpsilonECCLASTContext)
 
-	// EnterExpressionCaseClauseECCLAST is called when entering the expressionCaseClauseECCLAST production.
-	EnterExpressionCaseClauseECCLAST(c *ExpressionCaseClauseECCLASTContext)
+	// EnterExpCaseClauseECCLAST is called when entering the expCaseClauseECCLAST production.
+	EnterExpCaseClauseECCLAST(c *ExpCaseClauseECCLASTContext)
 
-	// EnterExpressionSwitchCaseECCAST is called when entering the expressionSwitchCaseECCAST production.
-	EnterExpressionSwitchCaseECCAST(c *ExpressionSwitchCaseECCASTContext)
+	// EnterExpSwitchCaseECCAST is called when entering the expSwitchCaseECCAST production.
+	EnterExpSwitchCaseECCAST(c *ExpSwitchCaseECCASTContext)
 
 	// EnterCaseESCAST is called when entering the caseESCAST production.
 	EnterCaseESCAST(c *CaseESCASTContext)
@@ -277,11 +283,11 @@ type goParserListener interface {
 	// ExitInnerVarDeclsAST is called when exiting the innerVarDeclsAST production.
 	ExitInnerVarDeclsAST(c *InnerVarDeclsASTContext)
 
-	// ExitIdentifierListDTSVDAST is called when exiting the identifierListDTSVDAST production.
-	ExitIdentifierListDTSVDAST(c *IdentifierListDTSVDASTContext)
+	// ExitIdListDTSVDAST is called when exiting the idListDTSVDAST production.
+	ExitIdListDTSVDAST(c *IdListDTSVDASTContext)
 
-	// ExitIdentifierListSVDAST is called when exiting the identifierListSVDAST production.
-	ExitIdentifierListSVDAST(c *IdentifierListSVDASTContext)
+	// ExitIdListSVDAST is called when exiting the idListSVDAST production.
+	ExitIdListSVDAST(c *IdListSVDASTContext)
 
 	// ExitSingleVarDAST is called when exiting the singleVarDAST production.
 	ExitSingleVarDAST(c *SingleVarDASTContext)
@@ -292,8 +298,8 @@ type goParserListener interface {
 	// ExitTypeTDAST is called when exiting the typeTDAST production.
 	ExitTypeTDAST(c *TypeTDASTContext)
 
-	// ExitInnerTypeDeclsASt is called when exiting the innerTypeDeclsASt production.
-	ExitInnerTypeDeclsASt(c *InnerTypeDeclsAStContext)
+	// ExitInnerTypeDeclsAST is called when exiting the innerTypeDeclsAST production.
+	ExitInnerTypeDeclsAST(c *InnerTypeDeclsASTContext)
 
 	// ExitIdSYDAST is called when exiting the idSYDAST production.
 	ExitIdSYDAST(c *IdSYDASTContext)
@@ -319,8 +325,8 @@ type goParserListener interface {
 	// ExitArrayDeclTypeDTAST is called when exiting the arrayDeclTypeDTAST production.
 	ExitArrayDeclTypeDTAST(c *ArrayDeclTypeDTASTContext)
 
-	// ExitDeclTypeAST is called when exiting the declTypeAST production.
-	ExitDeclTypeAST(c *DeclTypeASTContext)
+	// ExitStructDeclTypeDTAST is called when exiting the structDeclTypeDTAST production.
+	ExitStructDeclTypeDTAST(c *StructDeclTypeDTASTContext)
 
 	// ExitLsbSDTAST is called when exiting the lsbSDTAST production.
 	ExitLsbSDTAST(c *LsbSDTASTContext)
@@ -328,8 +334,8 @@ type goParserListener interface {
 	// ExitLsbADTAST is called when exiting the lsbADTAST production.
 	ExitLsbADTAST(c *LsbADTASTContext)
 
-	// ExitStrctSDTAST is called when exiting the strctSDTAST production.
-	ExitStrctSDTAST(c *StrctSDTASTContext)
+	// ExitStructSDTAST is called when exiting the structSDTAST production.
+	ExitStructSDTAST(c *StructSDTASTContext)
 
 	// ExitStructMemDeclsAST is called when exiting the structMemDeclsAST production.
 	ExitStructMemDeclsAST(c *StructMemDeclsASTContext)
@@ -337,32 +343,32 @@ type goParserListener interface {
 	// ExitIdentifierListAST is called when exiting the identifierListAST production.
 	ExitIdentifierListAST(c *IdentifierListASTContext)
 
-	// ExitExpressionAST is called when exiting the expressionAST production.
-	ExitExpressionAST(c *ExpressionASTContext)
-
 	// ExitExpressionEAST is called when exiting the expressionEAST production.
 	ExitExpressionEAST(c *ExpressionEASTContext)
 
 	// ExitPrimaryExpressionEAST is called when exiting the primaryExpressionEAST production.
 	ExitPrimaryExpressionEAST(c *PrimaryExpressionEASTContext)
 
-	// ExitExpressionListASt is called when exiting the expressionListASt production.
-	ExitExpressionListASt(c *ExpressionListAStContext)
+	// ExitOperatorEAST is called when exiting the operatorEAST production.
+	ExitOperatorEAST(c *OperatorEASTContext)
 
-	// ExitCapExpressionPEAST is called when exiting the capExpressionPEAST production.
-	ExitCapExpressionPEAST(c *CapExpressionPEASTContext)
+	// ExitExpressionListAST is called when exiting the expressionListAST production.
+	ExitExpressionListAST(c *ExpressionListASTContext)
 
-	// ExitPrimaryExpressionPEAST is called when exiting the primaryExpressionPEAST production.
-	ExitPrimaryExpressionPEAST(c *PrimaryExpressionPEASTContext)
+	// ExitLengthExpPEAST is called when exiting the lengthExpPEAST production.
+	ExitLengthExpPEAST(c *LengthExpPEASTContext)
 
-	// ExitLengthExpressionPEAST is called when exiting the lengthExpressionPEAST production.
-	ExitLengthExpressionPEAST(c *LengthExpressionPEASTContext)
-
-	// ExitAppendExpressionPEAST is called when exiting the appendExpressionPEAST production.
-	ExitAppendExpressionPEAST(c *AppendExpressionPEASTContext)
+	// ExitAppendExpPEAST is called when exiting the appendExpPEAST production.
+	ExitAppendExpPEAST(c *AppendExpPEASTContext)
 
 	// ExitOperandPEAST is called when exiting the operandPEAST production.
 	ExitOperandPEAST(c *OperandPEASTContext)
+
+	// ExitPrimaryExpPEAST is called when exiting the primaryExpPEAST production.
+	ExitPrimaryExpPEAST(c *PrimaryExpPEASTContext)
+
+	// ExitCapExpPEAST is called when exiting the capExpPEAST production.
+	ExitCapExpPEAST(c *CapExpPEASTContext)
 
 	// ExitLiteralOAST is called when exiting the literalOAST production.
 	ExitLiteralOAST(c *LiteralOASTContext)
@@ -370,8 +376,8 @@ type goParserListener interface {
 	// ExitIdOAST is called when exiting the idOAST production.
 	ExitIdOAST(c *IdOASTContext)
 
-	// ExitLpOAST is called when exiting the lpOAST production.
-	ExitLpOAST(c *LpOASTContext)
+	// ExitExpressionOAST is called when exiting the expressionOAST production.
+	ExitExpressionOAST(c *ExpressionOASTContext)
 
 	// ExitIntliteralAST is called when exiting the intliteralAST production.
 	ExitIntliteralAST(c *IntliteralASTContext)
@@ -379,8 +385,8 @@ type goParserListener interface {
 	// ExitFloatliteralAST is called when exiting the floatliteralAST production.
 	ExitFloatliteralAST(c *FloatliteralASTContext)
 
-	// ExitRunliteral is called when exiting the runliteral production.
-	ExitRunliteral(c *RunliteralContext)
+	// ExitRunliteralAST is called when exiting the runliteralAST production.
+	ExitRunliteralAST(c *RunliteralASTContext)
 
 	// ExitRawsliteralAST is called when exiting the rawsliteralAST production.
 	ExitRawsliteralAST(c *RawsliteralASTContext)
@@ -454,44 +460,47 @@ type goParserListener interface {
 	// ExitExpressionSSAST is called when exiting the expressionSSAST production.
 	ExitExpressionSSAST(c *ExpressionSSASTContext)
 
-	// ExitAssignmentStatementSS is called when exiting the assignmentStatementSS production.
-	ExitAssignmentStatementSS(c *AssignmentStatementSSContext)
+	// ExitAssigmentStatementSSAST is called when exiting the assigmentStatementSSAST production.
+	ExitAssigmentStatementSSAST(c *AssigmentStatementSSASTContext)
 
-	// ExitExpressionListSS is called when exiting the expressionListSS production.
-	ExitExpressionListSS(c *ExpressionListSSContext)
+	// ExitExpListSSAST is called when exiting the expListSSAST production.
+	ExitExpListSSAST(c *ExpListSSASTContext)
 
-	// ExitExpressionListASAST is called when exiting the expressionListASAST production.
-	ExitExpressionListASAST(c *ExpressionListASASTContext)
+	// ExitExpListASAST is called when exiting the expListASAST production.
+	ExitExpListASAST(c *ExpListASASTContext)
 
-	// ExitExpressionASAST is called when exiting the expressionASAST production.
-	ExitExpressionASAST(c *ExpressionASASTContext)
+	// ExitExpASAST is called when exiting the expASAST production.
+	ExitExpASAST(c *ExpASASTContext)
 
 	// ExitIsExpressionBlockISAST is called when exiting the isExpressionBlockISAST production.
 	ExitIsExpressionBlockISAST(c *IsExpressionBlockISASTContext)
 
-	// ExitIsExpressionBlockIsISAST is called when exiting the isExpressionBlockIsISAST production.
-	ExitIsExpressionBlockIsISAST(c *IsExpressionBlockIsISASTContext)
+	// ExitIsExpBlockIsISAST is called when exiting the isExpBlockIsISAST production.
+	ExitIsExpBlockIsISAST(c *IsExpBlockIsISASTContext)
 
-	// ExitIsSimpleStamentBlockISAST is called when exiting the isSimpleStamentBlockISAST production.
-	ExitIsSimpleStamentBlockISAST(c *IsSimpleStamentBlockISASTContext)
+	// ExitIsExpBlockISAST is called when exiting the isExpBlockISAST production.
+	ExitIsExpBlockISAST(c *IsExpBlockISASTContext)
 
-	// ExitIsSimpleStamentExpressionBlockISAST is called when exiting the isSimpleStamentExpressionBlockISAST production.
-	ExitIsSimpleStamentExpressionBlockISAST(c *IsSimpleStamentExpressionBlockISASTContext)
+	// ExitIsSSExpBlockISAST is called when exiting the isSSExpBlockISAST production.
+	ExitIsSSExpBlockISAST(c *IsSSExpBlockISASTContext)
 
-	// ExitIsSimpleStamentExpressionBlockifSAST is called when exiting the isSimpleStamentExpressionBlockifSAST production.
-	ExitIsSimpleStamentExpressionBlockifSAST(c *IsSimpleStamentExpressionBlockifSASTContext)
+	// ExitIsSSExpBlockifSAST is called when exiting the isSSExpBlockifSAST production.
+	ExitIsSSExpBlockifSAST(c *IsSSExpBlockifSASTContext)
 
-	// ExitIsSimpleStamentExpressionBlockBlockAST is called when exiting the isSimpleStamentExpressionBlockBlockAST production.
-	ExitIsSimpleStamentExpressionBlockBlockAST(c *IsSimpleStamentExpressionBlockBlockASTContext)
+	// ExitIsSSExpBlockBlockAST is called when exiting the isSSExpBlockBlockAST production.
+	ExitIsSSExpBlockBlockAST(c *IsSSExpBlockBlockASTContext)
 
 	// ExitFBlockLAST is called when exiting the fBlockLAST production.
 	ExitFBlockLAST(c *FBlockLASTContext)
 
-	// ExitFExpressionBlockLAST is called when exiting the fExpressionBlockLAST production.
-	ExitFExpressionBlockLAST(c *FExpressionBlockLASTContext)
+	// ExitFExpBlockLAST is called when exiting the fExpBlockLAST production.
+	ExitFExpBlockLAST(c *FExpBlockLASTContext)
 
-	// ExitFSimpleStatementLAST is called when exiting the fSimpleStatementLAST production.
-	ExitFSimpleStatementLAST(c *FSimpleStatementLASTContext)
+	// ExitFSimpStateExpSBlockLAST is called when exiting the fSimpStateExpSBlockLAST production.
+	ExitFSimpStateExpSBlockLAST(c *FSimpStateExpSBlockLASTContext)
+
+	// ExitFSimpStateSimpStateBlockLAST is called when exiting the fSimpStateSimpStateBlockLAST production.
+	ExitFSimpStateSimpStateBlockLAST(c *FSimpStateSimpStateBlockLASTContext)
 
 	// ExitSSimpleStatSAST is called when exiting the sSimpleStatSAST production.
 	ExitSSimpleStatSAST(c *SSimpleStatSASTContext)
@@ -499,17 +508,20 @@ type goParserListener interface {
 	// ExitSExpressionSAST is called when exiting the sExpressionSAST production.
 	ExitSExpressionSAST(c *SExpressionSASTContext)
 
+	// ExitSSimpleStatExpCCListSAST is called when exiting the sSimpleStatExpCCListSAST production.
+	ExitSSimpleStatExpCCListSAST(c *SSimpleStatExpCCListSASTContext)
+
 	// ExitSBlockSAST is called when exiting the sBlockSAST production.
 	ExitSBlockSAST(c *SBlockSASTContext)
 
 	// ExitEpsilonECCLAST is called when exiting the epsilonECCLAST production.
 	ExitEpsilonECCLAST(c *EpsilonECCLASTContext)
 
-	// ExitExpressionCaseClauseECCLAST is called when exiting the expressionCaseClauseECCLAST production.
-	ExitExpressionCaseClauseECCLAST(c *ExpressionCaseClauseECCLASTContext)
+	// ExitExpCaseClauseECCLAST is called when exiting the expCaseClauseECCLAST production.
+	ExitExpCaseClauseECCLAST(c *ExpCaseClauseECCLASTContext)
 
-	// ExitExpressionSwitchCaseECCAST is called when exiting the expressionSwitchCaseECCAST production.
-	ExitExpressionSwitchCaseECCAST(c *ExpressionSwitchCaseECCASTContext)
+	// ExitExpSwitchCaseECCAST is called when exiting the expSwitchCaseECCAST production.
+	ExitExpSwitchCaseECCAST(c *ExpSwitchCaseECCASTContext)
 
 	// ExitCaseESCAST is called when exiting the caseESCAST production.
 	ExitCaseESCAST(c *CaseESCASTContext)
