@@ -1,6 +1,6 @@
 // Code generated from D:/Tec/Compi/MiniGo1/MiniGO/compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
-package generated // goParser
+package parser // goParser
 import "github.com/antlr4-go/antlr/v4"
 
 // A complete Visitor for a parse tree produced by goParser.
@@ -13,8 +13,14 @@ type goParserVisitor interface {
 	// Visit a parse tree produced by goParser#topDeclarationListAST.
 	VisitTopDeclarationListAST(ctx *TopDeclarationListASTContext) interface{}
 
-	// Visit a parse tree produced by goParser#varVDAST.
-	VisitVarVDAST(ctx *VarVDASTContext) interface{}
+	// Visit a parse tree produced by goParser#singleVarVDAST.
+	VisitSingleVarVDAST(ctx *SingleVarVDASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#innerVarVDAST.
+	VisitInnerVarVDAST(ctx *InnerVarVDASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#lpVDAST.
+	VisitLpVDAST(ctx *LpVDASTContext) interface{}
 
 	// Visit a parse tree produced by goParser#innerVarDeclsAST.
 	VisitInnerVarDeclsAST(ctx *InnerVarDeclsASTContext) interface{}
@@ -31,8 +37,14 @@ type goParserVisitor interface {
 	// Visit a parse tree produced by goParser#singleVarDeclNoExpsAST.
 	VisitSingleVarDeclNoExpsAST(ctx *SingleVarDeclNoExpsASTContext) interface{}
 
-	// Visit a parse tree produced by goParser#typeTDAST.
-	VisitTypeTDAST(ctx *TypeTDASTContext) interface{}
+	// Visit a parse tree produced by goParser#singleTypeDeclTDAST.
+	VisitSingleTypeDeclTDAST(ctx *SingleTypeDeclTDASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#innerTypeDeclsTDAST.
+	VisitInnerTypeDeclsTDAST(ctx *InnerTypeDeclsTDASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#lPTypeDeclTDAST.
+	VisitLPTypeDeclTDAST(ctx *LPTypeDeclTDASTContext) interface{}
 
 	// Visit a parse tree produced by goParser#innerTypeDeclsAST.
 	VisitInnerTypeDeclsAST(ctx *InnerTypeDeclsASTContext) interface{}
@@ -91,6 +103,12 @@ type goParserVisitor interface {
 	// Visit a parse tree produced by goParser#expressionListAST.
 	VisitExpressionListAST(ctx *ExpressionListASTContext) interface{}
 
+	// Visit a parse tree produced by goParser#primaryExpArgumentsPEAST.
+	VisitPrimaryExpArgumentsPEAST(ctx *PrimaryExpArgumentsPEASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#primaryExpSelectorPEAST.
+	VisitPrimaryExpSelectorPEAST(ctx *PrimaryExpSelectorPEASTContext) interface{}
+
 	// Visit a parse tree produced by goParser#lengthExpPEAST.
 	VisitLengthExpPEAST(ctx *LengthExpPEASTContext) interface{}
 
@@ -100,11 +118,11 @@ type goParserVisitor interface {
 	// Visit a parse tree produced by goParser#operandPEAST.
 	VisitOperandPEAST(ctx *OperandPEASTContext) interface{}
 
-	// Visit a parse tree produced by goParser#primaryExpPEAST.
-	VisitPrimaryExpPEAST(ctx *PrimaryExpPEASTContext) interface{}
-
 	// Visit a parse tree produced by goParser#capExpPEAST.
 	VisitCapExpPEAST(ctx *CapExpPEASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#primaryExpIndexPEAST.
+	VisitPrimaryExpIndexPEAST(ctx *PrimaryExpIndexPEASTContext) interface{}
 
 	// Visit a parse tree produced by goParser#literalOAST.
 	VisitLiteralOAST(ctx *LiteralOASTContext) interface{}
@@ -193,8 +211,14 @@ type goParserVisitor interface {
 	// Visit a parse tree produced by goParser#epsilonSSAST.
 	VisitEpsilonSSAST(ctx *EpsilonSSASTContext) interface{}
 
-	// Visit a parse tree produced by goParser#expressionSSAST.
-	VisitExpressionSSAST(ctx *ExpressionSSASTContext) interface{}
+	// Visit a parse tree produced by goParser#expressionINCSSAST.
+	VisitExpressionINCSSAST(ctx *ExpressionINCSSASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#expressionDECSSAST.
+	VisitExpressionDECSSAST(ctx *ExpressionDECSSASTContext) interface{}
+
+	// Visit a parse tree produced by goParser#expressionEpsilonSSAST.
+	VisitExpressionEpsilonSSAST(ctx *ExpressionEpsilonSSASTContext) interface{}
 
 	// Visit a parse tree produced by goParser#assigmentStatementSSAST.
 	VisitAssigmentStatementSSAST(ctx *AssigmentStatementSSASTContext) interface{}
@@ -264,9 +288,6 @@ type goParserVisitor interface {
 
 	// Visit a parse tree produced by goParser#defaultESCAST.
 	VisitDefaultESCAST(ctx *DefaultESCASTContext) interface{}
-
-	// Visit a parse tree produced by goParser#operator.
-	VisitOperator(ctx *OperatorContext) interface{}
 
 	// Visit a parse tree produced by goParser#epsilonAST.
 	VisitEpsilonAST(ctx *EpsilonASTContext) interface{}

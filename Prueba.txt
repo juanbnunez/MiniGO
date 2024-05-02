@@ -1,17 +1,23 @@
+//Primera Prueba, sirve para tipo int, string, float, bool, rune y char
 package main;
+var m int = 5;
 
-var x int;
+//(Para las siguientes pruebas se debe descomentar la función VisitIdListDTSVDAST
+//que se encuentra comentada y comentar la función VisitIdListDTSVDAST que está descomentada)
 
 
+//Segunda Prueba:
+package main;
+var m []int = 5,6,7;
 
-/*
-func main() {
-    x = 10;
-    if x > 5 {
-        println("x es mayor que 5");
-    } else {
-        println("x es menor o igual que 5");
-    };
-};
+//Tercera Prueba (sale error por el dato de tipo diferente):
+package main;
+var m []int = 5,"unk",7;
 
-*/
+//Cuarta Prueba:
+package main;
+var saludo [2]string = "Hola", "Profe";
+
+//Quinta Prueba: (Da error porque son más datos de lo permitido)
+package main;
+var contar [3]float = 2.1,0.1,9.5,7.6;

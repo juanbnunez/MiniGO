@@ -82,11 +82,28 @@ DEFAULT : 'default';
 ID : ('_'|) LETTER (LETTER|DIGIT|'_')* ;
 INTLITERAL : DIGIT+ ;
 FLOATLITERAL : DIGIT+ '.' DIGIT* ([eE] [+\-]? DIGIT+)? ;
-RUNELITERAL : '\'' . '\'' ;
+RUNELITERAL : '\'' . '\''
+              | '\'' '\\' ('n' | 'r' | 't' | '\\' | '\'' | '"')'\'';
 RAWSTRINGLITERAL : '`' ( '\\' . | ~('\\'|'`') )* '`';
 INTERPRETEDSTRINGLITERAL : '"' ( '\\' . | ~('\\'|'"') )* '"';
+
 LETTER : 'a'..'z' | 'A'..'Z';
 DIGIT : '0'..'9' ;
+
+
+//RUNELITERAL         : '"' ( UNICODEVALUE | BYTEVALUE ) '"' ;
+//UNICODEVALUE        : UNICODECHAR | LITTLEUVALUE | BIGUVALUE | ECAPEDCHAR;
+//BYTEVALUE           : OCTALBYTEVALUE | HEXBYTEVALUE;
+//OCTALBYTEVALUE      : '\\' OCTALDIGIT OCTALDIGIT OCTALDIGIT;
+//HEXBYTEVALUE        : '\\' 'x' HEXDIGIT HEXDIGIT;
+//LITTLEUVALUE        : '\\' 'u' HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT;
+//BIGUVALUE           : '\\' 'U' HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT
+//                           HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT;
+
+//ECAPEDCHAR          : '\\' ( 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' | '\\' | '\'' | '"' );
+//UNICODECHAR         : /* an arbitrary Unicode code point except newline */ ;
+//OCTALDIGIT          : '0' .. '7' ;
+//HEXDIGIT            : '0' .. '9' | 'A' .. 'F' | 'a' .. 'f' ;
 
 //Skiped elements
 LINE_COMMENT:   '//' ~[\r\n]* -> skip ;

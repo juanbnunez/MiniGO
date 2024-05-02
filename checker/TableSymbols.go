@@ -34,6 +34,24 @@ func NewSymbolTable() *SymbolTable {
 	}
 }
 
+type StructIdent struct {
+	token  antlr.TerminalNode
+	typ    int
+	nivel  int
+	fields []int
+}
+
+func (t *SymbolTable) insertStructIdent(id antlr.TerminalNode, fields []int) {
+	s := &StructIdent{
+		token:  id,
+		typ:    50,
+		nivel:  t.currentLevel,
+		fields: fields,
+	}
+	t.table = append([]Ident{s}, t.table...)
+
+}
+
 func (t *SymbolTable) insert(id antlr.TerminalNode, tp int) {
 	v := &VarIdent{
 		tok:        id,
@@ -54,35 +72,51 @@ func (t *SymbolTable) insertWithParams(id antlr.TerminalNode, tipo int, p []int)
 	t.table = append([]Ident{m}, t.table...) // se inserta al inicio
 }
 
-/*
-	func (t *SymbolTable) search(name string) Ident {
-		for _, id := range t.table {
-			if id.(*VarIdent).tok.GetText() == name || id.(*MethodIdent).tok.GetText() == name {
-				return id // se encontró
-			}
-		}
-		return nil
-	}
-*/
 func (t *SymbolTable) search(name string) Ident {
 	for _, id := range t.table {
-		if id.(*VarIdent).tok.GetText() == name || id.(*MethodIdent).tok.GetText() == name {
-			return id // se encontró
+		if v, ok := id.(VarIdent); ok {
+			if v.tok.GetText() == name {
+				return v
+			}
+		} else if m, ok := id.(MethodIdent); ok {
+			if m.tok.GetText() == name {
+				return m
+			}
 		}
+
 	}
 	return nil
+}
+
+func (t *SymbolTable) searchMethodInCurrentLevel() Ident {
+	var temp Ident
+	tempLevel := t.currentLevel // se guarda el nivel actual para comparar
+	for _, id := range t.table {
+		if m, ok := id.(*MethodIdent); ok {
+			if m.level == tempLevel {
+				return m
+			}
+		}
+	}
+	return temp
 }
 
 func (t *SymbolTable) searchInCurrentLevel(name string) Ident {
 	var temp Ident
 	tempLevel := t.currentLevel // se guarda el nivel actual para comparar
 	for _, id := range t.table {
-		if tempLevel == id.(*VarIdent).level || tempLevel == id.(*MethodIdent).level {
-			if id.(*VarIdent).tok.GetText() == name || id.(*MethodIdent).tok.GetText() == name {
-				temp = id // se encontró en el nivel actual
+		if v, ok := id.(*VarIdent); ok {
+			if v.tok.GetText() == name && v.level == tempLevel {
+				return v
 			}
-		} else {
-			break // se termina la búsqueda
+		} else if m, ok := id.(*MethodIdent); ok {
+			if m.tok.GetText() == name && m.level == tempLevel {
+				return m
+			}
+		} else if s, ok := id.(*StructIdent); ok {
+			if s.token.GetText() == name && s.nivel == tempLevel {
+				return s
+			}
 		}
 	}
 	return temp
@@ -92,15 +126,24 @@ func (t *SymbolTable) openScope() { // abre un nuevo nivel en la tabla
 	t.currentLevel++
 }
 
-func (t *SymbolTable) closeScope() { // cierra el nivel actual en la tabla
+func (t *SymbolTable) closeScope() {
 	var newTabla []Ident
+
 	for _, ident := range t.table {
-		if ident.(*VarIdent).level != t.currentLevel && ident.(*MethodIdent).level != t.currentLevel {
-			newTabla = append(newTabla, ident) // se copian los identificadores
+		switch ident.(type) {
+		case *VarIdent:
+			if ident.(*VarIdent).level != t.currentLevel {
+				newTabla = append(newTabla, ident) // se copian los identificadores
+			}
+		case *MethodIdent:
+			if ident.(*MethodIdent).level != t.currentLevel {
+				newTabla = append(newTabla, ident) // se copian los identificadores
+			}
 		}
+
+		t.table = newTabla // se actualiza la tabla
+		t.currentLevel--   // se disminuye el nivel
 	}
-	t.table = newTabla // se actualiza la tabla
-	t.currentLevel--   // se disminuye el nivel
 }
 
 func (t *SymbolTable) printTable() {
@@ -112,5 +155,5 @@ func (t *SymbolTable) printTable() {
 			fmt.Printf("NAME: %s - %d - %d\n", m.tok, m.level, m.typ)
 		}
 	}
-	fmt.Println("----- FIN TABLA ------")
+	fmt.Println("---------- FIN TABLA ----------")
 }

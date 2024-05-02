@@ -1,6 +1,6 @@
 // Code generated from D:/Tec/Compi/MiniGo1/MiniGO/compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
-package generated // goParser
+package parser // goParser
 import "github.com/antlr4-go/antlr/v4"
 
 // goParserListener is a complete listener for a parse tree produced by goParser.
@@ -13,8 +13,14 @@ type goParserListener interface {
 	// EnterTopDeclarationListAST is called when entering the topDeclarationListAST production.
 	EnterTopDeclarationListAST(c *TopDeclarationListASTContext)
 
-	// EnterVarVDAST is called when entering the varVDAST production.
-	EnterVarVDAST(c *VarVDASTContext)
+	// EnterSingleVarVDAST is called when entering the singleVarVDAST production.
+	EnterSingleVarVDAST(c *SingleVarVDASTContext)
+
+	// EnterInnerVarVDAST is called when entering the innerVarVDAST production.
+	EnterInnerVarVDAST(c *InnerVarVDASTContext)
+
+	// EnterLpVDAST is called when entering the lpVDAST production.
+	EnterLpVDAST(c *LpVDASTContext)
 
 	// EnterInnerVarDeclsAST is called when entering the innerVarDeclsAST production.
 	EnterInnerVarDeclsAST(c *InnerVarDeclsASTContext)
@@ -31,8 +37,14 @@ type goParserListener interface {
 	// EnterSingleVarDeclNoExpsAST is called when entering the singleVarDeclNoExpsAST production.
 	EnterSingleVarDeclNoExpsAST(c *SingleVarDeclNoExpsASTContext)
 
-	// EnterTypeTDAST is called when entering the typeTDAST production.
-	EnterTypeTDAST(c *TypeTDASTContext)
+	// EnterSingleTypeDeclTDAST is called when entering the singleTypeDeclTDAST production.
+	EnterSingleTypeDeclTDAST(c *SingleTypeDeclTDASTContext)
+
+	// EnterInnerTypeDeclsTDAST is called when entering the innerTypeDeclsTDAST production.
+	EnterInnerTypeDeclsTDAST(c *InnerTypeDeclsTDASTContext)
+
+	// EnterLPTypeDeclTDAST is called when entering the lPTypeDeclTDAST production.
+	EnterLPTypeDeclTDAST(c *LPTypeDeclTDASTContext)
 
 	// EnterInnerTypeDeclsAST is called when entering the innerTypeDeclsAST production.
 	EnterInnerTypeDeclsAST(c *InnerTypeDeclsASTContext)
@@ -91,6 +103,12 @@ type goParserListener interface {
 	// EnterExpressionListAST is called when entering the expressionListAST production.
 	EnterExpressionListAST(c *ExpressionListASTContext)
 
+	// EnterPrimaryExpArgumentsPEAST is called when entering the primaryExpArgumentsPEAST production.
+	EnterPrimaryExpArgumentsPEAST(c *PrimaryExpArgumentsPEASTContext)
+
+	// EnterPrimaryExpSelectorPEAST is called when entering the primaryExpSelectorPEAST production.
+	EnterPrimaryExpSelectorPEAST(c *PrimaryExpSelectorPEASTContext)
+
 	// EnterLengthExpPEAST is called when entering the lengthExpPEAST production.
 	EnterLengthExpPEAST(c *LengthExpPEASTContext)
 
@@ -100,11 +118,11 @@ type goParserListener interface {
 	// EnterOperandPEAST is called when entering the operandPEAST production.
 	EnterOperandPEAST(c *OperandPEASTContext)
 
-	// EnterPrimaryExpPEAST is called when entering the primaryExpPEAST production.
-	EnterPrimaryExpPEAST(c *PrimaryExpPEASTContext)
-
 	// EnterCapExpPEAST is called when entering the capExpPEAST production.
 	EnterCapExpPEAST(c *CapExpPEASTContext)
+
+	// EnterPrimaryExpIndexPEAST is called when entering the primaryExpIndexPEAST production.
+	EnterPrimaryExpIndexPEAST(c *PrimaryExpIndexPEASTContext)
 
 	// EnterLiteralOAST is called when entering the literalOAST production.
 	EnterLiteralOAST(c *LiteralOASTContext)
@@ -193,8 +211,14 @@ type goParserListener interface {
 	// EnterEpsilonSSAST is called when entering the epsilonSSAST production.
 	EnterEpsilonSSAST(c *EpsilonSSASTContext)
 
-	// EnterExpressionSSAST is called when entering the expressionSSAST production.
-	EnterExpressionSSAST(c *ExpressionSSASTContext)
+	// EnterExpressionINCSSAST is called when entering the expressionINCSSAST production.
+	EnterExpressionINCSSAST(c *ExpressionINCSSASTContext)
+
+	// EnterExpressionDECSSAST is called when entering the expressionDECSSAST production.
+	EnterExpressionDECSSAST(c *ExpressionDECSSASTContext)
+
+	// EnterExpressionEpsilonSSAST is called when entering the expressionEpsilonSSAST production.
+	EnterExpressionEpsilonSSAST(c *ExpressionEpsilonSSASTContext)
 
 	// EnterAssigmentStatementSSAST is called when entering the assigmentStatementSSAST production.
 	EnterAssigmentStatementSSAST(c *AssigmentStatementSSASTContext)
@@ -265,9 +289,6 @@ type goParserListener interface {
 	// EnterDefaultESCAST is called when entering the defaultESCAST production.
 	EnterDefaultESCAST(c *DefaultESCASTContext)
 
-	// EnterOperator is called when entering the operator production.
-	EnterOperator(c *OperatorContext)
-
 	// EnterEpsilonAST is called when entering the epsilonAST production.
 	EnterEpsilonAST(c *EpsilonASTContext)
 
@@ -277,8 +298,14 @@ type goParserListener interface {
 	// ExitTopDeclarationListAST is called when exiting the topDeclarationListAST production.
 	ExitTopDeclarationListAST(c *TopDeclarationListASTContext)
 
-	// ExitVarVDAST is called when exiting the varVDAST production.
-	ExitVarVDAST(c *VarVDASTContext)
+	// ExitSingleVarVDAST is called when exiting the singleVarVDAST production.
+	ExitSingleVarVDAST(c *SingleVarVDASTContext)
+
+	// ExitInnerVarVDAST is called when exiting the innerVarVDAST production.
+	ExitInnerVarVDAST(c *InnerVarVDASTContext)
+
+	// ExitLpVDAST is called when exiting the lpVDAST production.
+	ExitLpVDAST(c *LpVDASTContext)
 
 	// ExitInnerVarDeclsAST is called when exiting the innerVarDeclsAST production.
 	ExitInnerVarDeclsAST(c *InnerVarDeclsASTContext)
@@ -295,8 +322,14 @@ type goParserListener interface {
 	// ExitSingleVarDeclNoExpsAST is called when exiting the singleVarDeclNoExpsAST production.
 	ExitSingleVarDeclNoExpsAST(c *SingleVarDeclNoExpsASTContext)
 
-	// ExitTypeTDAST is called when exiting the typeTDAST production.
-	ExitTypeTDAST(c *TypeTDASTContext)
+	// ExitSingleTypeDeclTDAST is called when exiting the singleTypeDeclTDAST production.
+	ExitSingleTypeDeclTDAST(c *SingleTypeDeclTDASTContext)
+
+	// ExitInnerTypeDeclsTDAST is called when exiting the innerTypeDeclsTDAST production.
+	ExitInnerTypeDeclsTDAST(c *InnerTypeDeclsTDASTContext)
+
+	// ExitLPTypeDeclTDAST is called when exiting the lPTypeDeclTDAST production.
+	ExitLPTypeDeclTDAST(c *LPTypeDeclTDASTContext)
 
 	// ExitInnerTypeDeclsAST is called when exiting the innerTypeDeclsAST production.
 	ExitInnerTypeDeclsAST(c *InnerTypeDeclsASTContext)
@@ -355,6 +388,12 @@ type goParserListener interface {
 	// ExitExpressionListAST is called when exiting the expressionListAST production.
 	ExitExpressionListAST(c *ExpressionListASTContext)
 
+	// ExitPrimaryExpArgumentsPEAST is called when exiting the primaryExpArgumentsPEAST production.
+	ExitPrimaryExpArgumentsPEAST(c *PrimaryExpArgumentsPEASTContext)
+
+	// ExitPrimaryExpSelectorPEAST is called when exiting the primaryExpSelectorPEAST production.
+	ExitPrimaryExpSelectorPEAST(c *PrimaryExpSelectorPEASTContext)
+
 	// ExitLengthExpPEAST is called when exiting the lengthExpPEAST production.
 	ExitLengthExpPEAST(c *LengthExpPEASTContext)
 
@@ -364,11 +403,11 @@ type goParserListener interface {
 	// ExitOperandPEAST is called when exiting the operandPEAST production.
 	ExitOperandPEAST(c *OperandPEASTContext)
 
-	// ExitPrimaryExpPEAST is called when exiting the primaryExpPEAST production.
-	ExitPrimaryExpPEAST(c *PrimaryExpPEASTContext)
-
 	// ExitCapExpPEAST is called when exiting the capExpPEAST production.
 	ExitCapExpPEAST(c *CapExpPEASTContext)
+
+	// ExitPrimaryExpIndexPEAST is called when exiting the primaryExpIndexPEAST production.
+	ExitPrimaryExpIndexPEAST(c *PrimaryExpIndexPEASTContext)
 
 	// ExitLiteralOAST is called when exiting the literalOAST production.
 	ExitLiteralOAST(c *LiteralOASTContext)
@@ -457,8 +496,14 @@ type goParserListener interface {
 	// ExitEpsilonSSAST is called when exiting the epsilonSSAST production.
 	ExitEpsilonSSAST(c *EpsilonSSASTContext)
 
-	// ExitExpressionSSAST is called when exiting the expressionSSAST production.
-	ExitExpressionSSAST(c *ExpressionSSASTContext)
+	// ExitExpressionINCSSAST is called when exiting the expressionINCSSAST production.
+	ExitExpressionINCSSAST(c *ExpressionINCSSASTContext)
+
+	// ExitExpressionDECSSAST is called when exiting the expressionDECSSAST production.
+	ExitExpressionDECSSAST(c *ExpressionDECSSASTContext)
+
+	// ExitExpressionEpsilonSSAST is called when exiting the expressionEpsilonSSAST production.
+	ExitExpressionEpsilonSSAST(c *ExpressionEpsilonSSASTContext)
 
 	// ExitAssigmentStatementSSAST is called when exiting the assigmentStatementSSAST production.
 	ExitAssigmentStatementSSAST(c *AssigmentStatementSSASTContext)
@@ -528,9 +573,6 @@ type goParserListener interface {
 
 	// ExitDefaultESCAST is called when exiting the defaultESCAST production.
 	ExitDefaultESCAST(c *DefaultESCASTContext)
-
-	// ExitOperator is called when exiting the operator production.
-	ExitOperator(c *OperatorContext)
 
 	// ExitEpsilonAST is called when exiting the epsilonAST production.
 	ExitEpsilonAST(c *EpsilonASTContext)

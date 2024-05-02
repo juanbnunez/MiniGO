@@ -1,6 +1,6 @@
 // Code generated from D:/Tec/Compi/MiniGo1/MiniGO/compiler/goParser.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
-package generated // goParser
+package parser // goParser
 import "github.com/antlr4-go/antlr/v4"
 
 // BasegoParserListener is a complete listener for a parse tree produced by goParser.
@@ -32,11 +32,23 @@ func (s *BasegoParserListener) EnterTopDeclarationListAST(ctx *TopDeclarationLis
 // ExitTopDeclarationListAST is called when production topDeclarationListAST is exited.
 func (s *BasegoParserListener) ExitTopDeclarationListAST(ctx *TopDeclarationListASTContext) {}
 
-// EnterVarVDAST is called when production varVDAST is entered.
-func (s *BasegoParserListener) EnterVarVDAST(ctx *VarVDASTContext) {}
+// EnterSingleVarVDAST is called when production singleVarVDAST is entered.
+func (s *BasegoParserListener) EnterSingleVarVDAST(ctx *SingleVarVDASTContext) {}
 
-// ExitVarVDAST is called when production varVDAST is exited.
-func (s *BasegoParserListener) ExitVarVDAST(ctx *VarVDASTContext) {}
+// ExitSingleVarVDAST is called when production singleVarVDAST is exited.
+func (s *BasegoParserListener) ExitSingleVarVDAST(ctx *SingleVarVDASTContext) {}
+
+// EnterInnerVarVDAST is called when production innerVarVDAST is entered.
+func (s *BasegoParserListener) EnterInnerVarVDAST(ctx *InnerVarVDASTContext) {}
+
+// ExitInnerVarVDAST is called when production innerVarVDAST is exited.
+func (s *BasegoParserListener) ExitInnerVarVDAST(ctx *InnerVarVDASTContext) {}
+
+// EnterLpVDAST is called when production lpVDAST is entered.
+func (s *BasegoParserListener) EnterLpVDAST(ctx *LpVDASTContext) {}
+
+// ExitLpVDAST is called when production lpVDAST is exited.
+func (s *BasegoParserListener) ExitLpVDAST(ctx *LpVDASTContext) {}
 
 // EnterInnerVarDeclsAST is called when production innerVarDeclsAST is entered.
 func (s *BasegoParserListener) EnterInnerVarDeclsAST(ctx *InnerVarDeclsASTContext) {}
@@ -68,11 +80,23 @@ func (s *BasegoParserListener) EnterSingleVarDeclNoExpsAST(ctx *SingleVarDeclNoE
 // ExitSingleVarDeclNoExpsAST is called when production singleVarDeclNoExpsAST is exited.
 func (s *BasegoParserListener) ExitSingleVarDeclNoExpsAST(ctx *SingleVarDeclNoExpsASTContext) {}
 
-// EnterTypeTDAST is called when production typeTDAST is entered.
-func (s *BasegoParserListener) EnterTypeTDAST(ctx *TypeTDASTContext) {}
+// EnterSingleTypeDeclTDAST is called when production singleTypeDeclTDAST is entered.
+func (s *BasegoParserListener) EnterSingleTypeDeclTDAST(ctx *SingleTypeDeclTDASTContext) {}
 
-// ExitTypeTDAST is called when production typeTDAST is exited.
-func (s *BasegoParserListener) ExitTypeTDAST(ctx *TypeTDASTContext) {}
+// ExitSingleTypeDeclTDAST is called when production singleTypeDeclTDAST is exited.
+func (s *BasegoParserListener) ExitSingleTypeDeclTDAST(ctx *SingleTypeDeclTDASTContext) {}
+
+// EnterInnerTypeDeclsTDAST is called when production innerTypeDeclsTDAST is entered.
+func (s *BasegoParserListener) EnterInnerTypeDeclsTDAST(ctx *InnerTypeDeclsTDASTContext) {}
+
+// ExitInnerTypeDeclsTDAST is called when production innerTypeDeclsTDAST is exited.
+func (s *BasegoParserListener) ExitInnerTypeDeclsTDAST(ctx *InnerTypeDeclsTDASTContext) {}
+
+// EnterLPTypeDeclTDAST is called when production lPTypeDeclTDAST is entered.
+func (s *BasegoParserListener) EnterLPTypeDeclTDAST(ctx *LPTypeDeclTDASTContext) {}
+
+// ExitLPTypeDeclTDAST is called when production lPTypeDeclTDAST is exited.
+func (s *BasegoParserListener) ExitLPTypeDeclTDAST(ctx *LPTypeDeclTDASTContext) {}
 
 // EnterInnerTypeDeclsAST is called when production innerTypeDeclsAST is entered.
 func (s *BasegoParserListener) EnterInnerTypeDeclsAST(ctx *InnerTypeDeclsASTContext) {}
@@ -188,6 +212,18 @@ func (s *BasegoParserListener) EnterExpressionListAST(ctx *ExpressionListASTCont
 // ExitExpressionListAST is called when production expressionListAST is exited.
 func (s *BasegoParserListener) ExitExpressionListAST(ctx *ExpressionListASTContext) {}
 
+// EnterPrimaryExpArgumentsPEAST is called when production primaryExpArgumentsPEAST is entered.
+func (s *BasegoParserListener) EnterPrimaryExpArgumentsPEAST(ctx *PrimaryExpArgumentsPEASTContext) {}
+
+// ExitPrimaryExpArgumentsPEAST is called when production primaryExpArgumentsPEAST is exited.
+func (s *BasegoParserListener) ExitPrimaryExpArgumentsPEAST(ctx *PrimaryExpArgumentsPEASTContext) {}
+
+// EnterPrimaryExpSelectorPEAST is called when production primaryExpSelectorPEAST is entered.
+func (s *BasegoParserListener) EnterPrimaryExpSelectorPEAST(ctx *PrimaryExpSelectorPEASTContext) {}
+
+// ExitPrimaryExpSelectorPEAST is called when production primaryExpSelectorPEAST is exited.
+func (s *BasegoParserListener) ExitPrimaryExpSelectorPEAST(ctx *PrimaryExpSelectorPEASTContext) {}
+
 // EnterLengthExpPEAST is called when production lengthExpPEAST is entered.
 func (s *BasegoParserListener) EnterLengthExpPEAST(ctx *LengthExpPEASTContext) {}
 
@@ -206,17 +242,17 @@ func (s *BasegoParserListener) EnterOperandPEAST(ctx *OperandPEASTContext) {}
 // ExitOperandPEAST is called when production operandPEAST is exited.
 func (s *BasegoParserListener) ExitOperandPEAST(ctx *OperandPEASTContext) {}
 
-// EnterPrimaryExpPEAST is called when production primaryExpPEAST is entered.
-func (s *BasegoParserListener) EnterPrimaryExpPEAST(ctx *PrimaryExpPEASTContext) {}
-
-// ExitPrimaryExpPEAST is called when production primaryExpPEAST is exited.
-func (s *BasegoParserListener) ExitPrimaryExpPEAST(ctx *PrimaryExpPEASTContext) {}
-
 // EnterCapExpPEAST is called when production capExpPEAST is entered.
 func (s *BasegoParserListener) EnterCapExpPEAST(ctx *CapExpPEASTContext) {}
 
 // ExitCapExpPEAST is called when production capExpPEAST is exited.
 func (s *BasegoParserListener) ExitCapExpPEAST(ctx *CapExpPEASTContext) {}
+
+// EnterPrimaryExpIndexPEAST is called when production primaryExpIndexPEAST is entered.
+func (s *BasegoParserListener) EnterPrimaryExpIndexPEAST(ctx *PrimaryExpIndexPEASTContext) {}
+
+// ExitPrimaryExpIndexPEAST is called when production primaryExpIndexPEAST is exited.
+func (s *BasegoParserListener) ExitPrimaryExpIndexPEAST(ctx *PrimaryExpIndexPEASTContext) {}
 
 // EnterLiteralOAST is called when production literalOAST is entered.
 func (s *BasegoParserListener) EnterLiteralOAST(ctx *LiteralOASTContext) {}
@@ -392,11 +428,23 @@ func (s *BasegoParserListener) EnterEpsilonSSAST(ctx *EpsilonSSASTContext) {}
 // ExitEpsilonSSAST is called when production epsilonSSAST is exited.
 func (s *BasegoParserListener) ExitEpsilonSSAST(ctx *EpsilonSSASTContext) {}
 
-// EnterExpressionSSAST is called when production expressionSSAST is entered.
-func (s *BasegoParserListener) EnterExpressionSSAST(ctx *ExpressionSSASTContext) {}
+// EnterExpressionINCSSAST is called when production expressionINCSSAST is entered.
+func (s *BasegoParserListener) EnterExpressionINCSSAST(ctx *ExpressionINCSSASTContext) {}
 
-// ExitExpressionSSAST is called when production expressionSSAST is exited.
-func (s *BasegoParserListener) ExitExpressionSSAST(ctx *ExpressionSSASTContext) {}
+// ExitExpressionINCSSAST is called when production expressionINCSSAST is exited.
+func (s *BasegoParserListener) ExitExpressionINCSSAST(ctx *ExpressionINCSSASTContext) {}
+
+// EnterExpressionDECSSAST is called when production expressionDECSSAST is entered.
+func (s *BasegoParserListener) EnterExpressionDECSSAST(ctx *ExpressionDECSSASTContext) {}
+
+// ExitExpressionDECSSAST is called when production expressionDECSSAST is exited.
+func (s *BasegoParserListener) ExitExpressionDECSSAST(ctx *ExpressionDECSSASTContext) {}
+
+// EnterExpressionEpsilonSSAST is called when production expressionEpsilonSSAST is entered.
+func (s *BasegoParserListener) EnterExpressionEpsilonSSAST(ctx *ExpressionEpsilonSSASTContext) {}
+
+// ExitExpressionEpsilonSSAST is called when production expressionEpsilonSSAST is exited.
+func (s *BasegoParserListener) ExitExpressionEpsilonSSAST(ctx *ExpressionEpsilonSSASTContext) {}
 
 // EnterAssigmentStatementSSAST is called when production assigmentStatementSSAST is entered.
 func (s *BasegoParserListener) EnterAssigmentStatementSSAST(ctx *AssigmentStatementSSASTContext) {}
@@ -537,12 +585,6 @@ func (s *BasegoParserListener) EnterDefaultESCAST(ctx *DefaultESCASTContext) {}
 
 // ExitDefaultESCAST is called when production defaultESCAST is exited.
 func (s *BasegoParserListener) ExitDefaultESCAST(ctx *DefaultESCASTContext) {}
-
-// EnterOperator is called when production operator is entered.
-func (s *BasegoParserListener) EnterOperator(ctx *OperatorContext) {}
-
-// ExitOperator is called when production operator is exited.
-func (s *BasegoParserListener) ExitOperator(ctx *OperatorContext) {}
 
 // EnterEpsilonAST is called when production epsilonAST is entered.
 func (s *BasegoParserListener) EnterEpsilonAST(ctx *EpsilonASTContext) {}

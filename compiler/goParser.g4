@@ -8,7 +8,9 @@ root :                      PACKAGE ID SEMI topDeclarationList                  
                             ;
 topDeclarationList :        (variableDecl | typeDecl | funcDecl)*                                                       #topDeclarationListAST
                             ;
-variableDecl :              VAR (singleVarDecl SEMI | LP innerVarDecls RP SEMI | LP RP SEMI)                            #varVDAST
+variableDecl :              VAR singleVarDecl SEMI                                                                      #singleVarVDAST
+                            |VAR LP innerVarDecls RP SEMI                                                               #innerVarVDAST
+                            |VAR LP RP SEMI                                                                             #lpVDAST
                             ;
 innerVarDecls :             singleVarDecl SEMI (singleVarDecl SEMI)*                                                    #innerVarDeclsAST
                             ;
@@ -18,7 +20,9 @@ singleVarDecl :             identifierList declType ASOP expressionList         
                             ;
 singleVarDeclNoExps	:       identifierList declType                                                                     #singleVarDeclNoExpsAST
                             ;
-typeDecl :                  TYPE (singleTypeDecl SEMI | LP innerTypeDecls RP SEMI | LP RP SEMI)                         #typeTDAST
+typeDecl :                  TYPE singleTypeDecl SEMI                                                                    #singleTypeDeclTDAST
+                            |TYPE LP innerTypeDecls RP SEMI                                                             #innerTypeDeclsTDAST
+                            |TYPE LP RP SEMI                                                                            #lPTypeDeclTDAST
                             ;
 innerTypeDecls :            singleTypeDecl SEMI (singleTypeDecl SEMI)*                                                  #innerTypeDeclsAST
                             ;
@@ -31,10 +35,10 @@ funcFrontDecl :             FUNC ID LP (funcArgDecls|epsilon) RP (declType|epsil
 funcArgDecls :              singleVarDeclNoExps (CM singleVarDeclNoExps)*                                               #funcArgDeclsAST
                             ;
 declType :                  LP declType RP                                                                              #lpDTAST
-                            | ID                                                                                        #idDTAST
-                            | sliceDeclType                                                                             #sliceDeclTypeDTAST
-                            | arrayDeclType                                                                             #arrayDeclTypeDTAST
-                            | structDeclType                                                                            #structDeclTypeDTAST
+                            |ID                                                                                         #idDTAST
+                            |sliceDeclType                                                                              #sliceDeclTypeDTAST
+                            |arrayDeclType                                                                              #arrayDeclTypeDTAST
+                            |structDeclType                                                                             #structDeclTypeDTAST
                             ;
 sliceDeclType :             LSB RSB declType                                                                            #lsbSDTAST
                             ;
@@ -47,13 +51,16 @@ structMemDecls :            singleVarDeclNoExps SEMI (singleVarDeclNoExps SEMI)*
 identifierList :            ID (CM ID)*                                                                                 #identifierListAST
                             ;
 expression :                primaryExpression                                                                           #primaryExpressionEAST
-                            | expression operator expression                                                            #expressionEAST
-                            | operator expression                                                                       #operatorEAST
+                            |expression (MUL|DIV|MOD|LSH|RSH|AMPER|BC|PL|MIN|VB|CARET|
+                            EQ|NEQ|LT|LTE|GT|GTE|LAND|LOR) expression                                                   #expressionEAST
+                            |(PL|MIN|NEG|CARET) expression                                                              #operatorEAST
                             ;
 expressionList :            expression (CM expression)*                                                                 #expressionListAST
                             ;
 primaryExpression :         operand                                                                                     #operandPEAST
-                            | primaryExpression (selector | index | arguments )                                         #primaryExpPEAST
+                            | primaryExpression selector                                                                #primaryExpSelectorPEAST
+                            | primaryExpression index                                                                   #primaryExpIndexPEAST
+                            | primaryExpression arguments                                                               #primaryExpArgumentsPEAST
                             | appendExpression                                                                          #appendExpPEAST
                             | lengthExpression                                                                          #lengthExpPEAST
                             | capExpression                                                                             #capExpPEAST
@@ -98,12 +105,14 @@ statement :                 PRINT LP (expressionList | epsilon) RP SEMI         
                             | variableDecl                                                                              #variableDeclSAST
                             ;
 simpleStatement	:           epsilon                                                                                     #epsilonSSAST
-                            | expression (INC | DEC | epsilon)                                                          #expressionSSAST
+                            | expression INC                                                                            #expressionINCSSAST
+                            | expression DEC                                                                            #expressionDECSSAST
+                            | expression epsilon                                                                        #expressionEpsilonSSAST
                             | assignmentStatement                                                                       #assigmentStatementSSAST
                             | expressionList SVD expressionList                                                         #expListSSAST
                             ;
-assignmentStatement :       expressionList operator expressionList                                                      #expListASAST
-                            |expression operator  expression                                                            #expASAST
+assignmentStatement :       expressionList ASOP expressionList                                                          #expListASAST
+                            |expression (AAOP|BAOP|SAOP|BOAOP|MAOP|BXOOP|LSAOP|RSAOP|BCAOP|RAOP|DAOP)expression         #expASAST
                             ;
 ifStatement :               IF expression block                                                                         #isExpressionBlockISAST
                             | IF expression block ELSE ifStatement                                                      #isExpBlockIsISAST
@@ -129,10 +138,6 @@ expressionCaseClause 	:   expressionSwitchCase COL statementList                
                             ;
 expressionSwitchCase :      CASE expressionList                                                                         #caseESCAST
                             | DEFAULT                                                                                   #defaultESCAST
-                            ;
-operator :                  MUL | DIV | MOD | LSH | RSH | AMPER | BC | PL | MIN | VB | CARET | EQ | NEQ | LT |
-                            LTE | GT | GTE | LAND | LOR | NEG | ASOP | AAOP | BAOP | SAOP | BOAOP | MAOP |
-                            BXOOP |LSAOP |RSAOP |BCAOP |RAOP |DAOP                                                      #operatorAST
                             ;
 epsilon :                                                                                                               #epsilonAST
                             ;
