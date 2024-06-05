@@ -13,6 +13,7 @@ type VarIdent struct {
 	typ        int                // tipo
 	level      int                // nivel
 	isConstant bool
+	//value      interface{} // valor de la variable
 }
 
 type MethodIdent struct {
@@ -26,6 +27,16 @@ type SymbolTable struct {
 	table        []Ident // lista de identificadores
 	currentLevel int     // nivel actual
 }
+
+// Método para obtener el valor de la variable
+/*func (v *VarIdent) GetValue() interface{} {
+	return v.value
+}
+
+// Método para establecer el valor de la variable
+func (v *VarIdent) SetValue(val interface{}) {
+	v.value = val
+}*/
 
 func NewSymbolTable() *SymbolTable {
 	return &SymbolTable{
@@ -58,6 +69,7 @@ func (t *SymbolTable) insert(id antlr.TerminalNode, tp int) {
 		typ:        tp,
 		level:      t.currentLevel,
 		isConstant: false,
+		//value:      val, // establecer el valor de la variable
 	}
 	t.table = append([]Ident{v}, t.table...) // se inserta al inicio
 }
@@ -86,6 +98,21 @@ func (t *SymbolTable) search(name string) Ident {
 
 	}
 	return nil
+}
+
+// crea una función para buscar una variable en la tabla de símbolos
+func (t *SymbolTable) searchVarInCurrentLevel(name string) Ident {
+	var temp Ident
+	tempLevel := t.currentLevel // se guarda el nivel actual para comparar
+	for _, id := range t.table {
+		if v, ok := id.(*VarIdent); ok {
+			if v.tok.GetText() == name && v.level == tempLevel {
+				return v
+			}
+		}
+	}
+	return temp
+
 }
 
 func (t *SymbolTable) searchMethodInCurrentLevel() Ident {

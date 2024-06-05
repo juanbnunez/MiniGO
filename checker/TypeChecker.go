@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/antlr4-go/antlr/v4"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -32,6 +33,7 @@ func NewTypeChecker() *TypeChecker {
 		errorList:           []string{},
 	}
 }
+
 func (v *TypeChecker) Visit(tree antlr.ParseTree) interface{} {
 	return tree.Accept(v)
 }
@@ -125,39 +127,40 @@ func (tc *TypeChecker) VisitInnerVarDeclsAST(ctx *parser.InnerVarDeclsASTContext
 	return nil
 }
 
-//Esta función sirve para tipos array y slices, pero no para expresiones normales
-
-/*
+// ------------------------------------
 func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) interface{} {
 	identifierList := tc.Visit(ctx.IdentifierList()).([]antlr.TerminalNode)
 	declType := tc.Visit(ctx.DeclType()).(antlr.TerminalNode)
 	expressionList := tc.Visit(ctx.ExpressionList()).([]antlr.TerminalNode)
 
-	// Get the number of expected elements
-	types := ctx.DeclType().GetText()
-	endIndex := strings.Index(types, "]") // Remove the square brackets "[" and "]"
-	if endIndex == -1 {
-		tc.errorList = append(tc.errorList, fmt.Sprintf("Error: ']' character not found"))
+	var expectedElements int //variable para guardar la cantidad de elementos esperados
 
-	}
-	numberString := types[1:endIndex] // Take the substring from the start to the character "]"
-	var expectedElements int
-	var err error
-	if numberString != "" { // If numberString is not empty, a specific number of elements is expected
-		expectedElements, err = strconv.Atoi(numberString)
-		if err != nil {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("Error: se esperaba un tamaño del arreglo de tipo int", err))
-			return nil
+	types := ctx.DeclType().GetText()
+	// Verificar si es un tipo de array o slice
+	isArray := strings.HasPrefix(types, "[")
+
+	if isArray == true {
+		endIndex := strings.Index(types, "]") // Remove the square brackets "[" and "]"
+
+		numberString := types[1:endIndex] // Take the substring from the start to the character "]"
+		var err error
+		if numberString != "" { // If numberString is not empty, a specific number of elements is expected
+			expectedElements, err = strconv.Atoi(numberString)
+			if err != nil {
+				tc.errorList = append(tc.errorList, fmt.Sprintf("Error: se esperaba un tamaño del arreglo de tipo int", err))
+				return nil
+			}
+		} else {
+			expectedElements = -1 // If numberString is empty, there are no restrictions on the number of elements
 		}
 	} else {
-		expectedElements = -1 // If numberString is empty, there are no restrictions on the number of elements
+		isArray = false
 	}
-
 	switch declType.GetText() {
 	case "int":
 		// Validate that the number of elements in expressionList matches the expected number (if specified)
-		if expectedElements != -1 && len(expressionList) > expectedElements {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %s", numberString))
+		if isArray == true && expectedElements != -1 && len(expressionList) > expectedElements {
+			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %d", expectedElements))
 		}
 		// Check that all expressions are of type INT
 		allInt := true
@@ -170,7 +173,7 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		// If all expressions are INT, perform insertion into the symbol table
 		if allInt {
 			for i, _ := range identifierList {
-				if tc.symbolTable.search(identifierList[i].GetText()) != nil {
+				if tc.symbolTable.searchVarInCurrentLevel(identifierList[i].GetText()) != nil {
 					tc.errorList = append(tc.errorList, fmt.Sprintf("Existing identifier %s in symbols table, line: %d:%d", identifierList[i].GetText(), identifierList[i].GetSymbol().GetLine(), identifierList[i].GetSymbol().GetColumn()))
 				} else {
 					tc.symbolTable.insert(identifierList[i], INT)
@@ -179,11 +182,10 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		} else {
 			tc.errorList = append(tc.errorList, fmt.Sprintf("All expressions must be of type int and match the number of identifiers"))
 		}
-
 	case "char":
 		// Validate that the number of elements in expressionList matches the expected number (if specified)
-		if expectedElements != -1 && len(expressionList) > expectedElements {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %s", numberString))
+		if isArray == true && expectedElements != -1 && len(expressionList) > expectedElements {
+			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %d", expectedElements))
 		}
 		// Check that all expressions are of type INT
 		allChar := true
@@ -196,7 +198,7 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		// If all expressions are INT, perform insertion into the symbol table
 		if allChar {
 			for i, _ := range identifierList {
-				if tc.symbolTable.search(identifierList[i].GetText()) != nil {
+				if tc.symbolTable.searchVarInCurrentLevel(identifierList[i].GetText()) != nil {
 					tc.errorList = append(tc.errorList, fmt.Sprintf("Existing identifier %s in symbols table, line: %d:%d", identifierList[i].GetText(), identifierList[i].GetSymbol().GetLine(), identifierList[i].GetSymbol().GetColumn()))
 				} else {
 					tc.symbolTable.insert(identifierList[i], CHAR)
@@ -207,8 +209,8 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		}
 	case "string":
 		// Validate that the number of elements in expressionList matches the expected number (if specified)
-		if expectedElements != -1 && len(expressionList) > expectedElements {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %s", numberString))
+		if isArray == true && expectedElements != -1 && len(expressionList) > expectedElements {
+			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %d", expectedElements))
 		}
 		// Check that all expressions are of type INT
 		allString := true
@@ -221,7 +223,7 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		// If all expressions are INT, perform insertion into the symbol table
 		if allString {
 			for i, _ := range identifierList {
-				if tc.symbolTable.search(identifierList[i].GetText()) != nil {
+				if tc.symbolTable.searchVarInCurrentLevel(identifierList[i].GetText()) != nil {
 					tc.errorList = append(tc.errorList, fmt.Sprintf("Existing identifier %s in symbols table, line: %d:%d", identifierList[i].GetText(), identifierList[i].GetSymbol().GetLine(), identifierList[i].GetSymbol().GetColumn()))
 				} else {
 					tc.symbolTable.insert(identifierList[i], STRING)
@@ -233,8 +235,8 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 
 	case "bool":
 		// Validate that the number of elements in expressionList matches the expected number (if specified)
-		if expectedElements != -1 && len(expressionList) > expectedElements {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %s", numberString))
+		if isArray == true && expectedElements != -1 && len(expressionList) > expectedElements {
+			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %d", expectedElements))
 		}
 		// Check that all expressions are of type INT
 		allBool := true
@@ -247,7 +249,7 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		// If all expressions are INT, perform insertion into the symbol table
 		if allBool {
 			for i, _ := range identifierList {
-				if tc.symbolTable.search(identifierList[i].GetText()) != nil {
+				if tc.symbolTable.searchVarInCurrentLevel(identifierList[i].GetText()) != nil {
 					tc.errorList = append(tc.errorList, fmt.Sprintf("Existing identifier %s in symbols table, line: %d:%d", identifierList[i].GetText(), identifierList[i].GetSymbol().GetLine(), identifierList[i].GetSymbol().GetColumn()))
 				} else {
 					tc.symbolTable.insert(identifierList[i], BOOL)
@@ -258,8 +260,8 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		}
 	case "float":
 		// Validate that the number of elements in expressionList matches the expected number (if specified)
-		if expectedElements != -1 && len(expressionList) > expectedElements {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %s", numberString))
+		if isArray == true && expectedElements != -1 && len(expressionList) > expectedElements {
+			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %d", expectedElements))
 		}
 		// Check that all expressions are of type INT
 		allFloat := true
@@ -272,7 +274,7 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		// If all expressions are INT, perform insertion into the symbol table
 		if allFloat {
 			for i, _ := range identifierList {
-				if tc.symbolTable.search(identifierList[i].GetText()) != nil {
+				if tc.symbolTable.searchVarInCurrentLevel(identifierList[i].GetText()) != nil {
 					tc.errorList = append(tc.errorList, fmt.Sprintf("Existing identifier %s in symbols table, line: %d:%d", identifierList[i].GetText(), identifierList[i].GetSymbol().GetLine(), identifierList[i].GetSymbol().GetColumn()))
 				} else {
 					tc.symbolTable.insert(identifierList[i], FLOAT)
@@ -283,8 +285,8 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		}
 	case "rune":
 		// Validate that the number of elements in expressionList matches the expected number (if specified)
-		if expectedElements != -1 && len(expressionList) > expectedElements {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %s", numberString))
+		if isArray == true && expectedElements != -1 && len(expressionList) > expectedElements {
+			tc.errorList = append(tc.errorList, fmt.Sprintf("The number of expressions does not match the specified quantity: %d", expectedElements))
 		}
 		// Check that all expressions are of type INT
 		allRune := true
@@ -297,7 +299,7 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		// If all expressions are INT, perform insertion into the symbol table
 		if allRune {
 			for i, _ := range identifierList {
-				if tc.symbolTable.search(identifierList[i].GetText()) != nil {
+				if tc.symbolTable.searchVarInCurrentLevel(identifierList[i].GetText()) != nil {
 					tc.errorList = append(tc.errorList, fmt.Sprintf("Existing identifier %s in symbols table, line: %d:%d", identifierList[i].GetText(), identifierList[i].GetSymbol().GetLine(), identifierList[i].GetSymbol().GetColumn()))
 				} else {
 					tc.symbolTable.insert(identifierList[i], RUNE)
@@ -308,93 +310,13 @@ func (tc *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) in
 		}
 
 	}
+
 	tc.symbolTable.printTable()
 	return nil
 
 }
-*/
 
-func (v *TypeChecker) VisitIdListDTSVDAST(ctx *parser.IdListDTSVDASTContext) interface{} {
-	//Se obtienen los identificadores y las expresiones del contexto
-	identifiers := v.Visit(ctx.IdentifierList()).([]antlr.TerminalNode)
-	exp := v.Visit(ctx.ExpressionList()).([]antlr.TerminalNode)
-
-	//Se obtiene el tipo del contexto
-	tp := ctx.DeclType().GetText()
-
-	switch tp { // Verifica el tipo de los identificadores
-	case "int":
-
-		for i, _ := range identifiers { // Recorre los identificadores
-			if exp[i].GetSymbol().GetTokenType() == INT { // Verifica si la expresión es de tipo entero
-
-
-				if v.symbolTable.search(identifiers[i].GetText()) != nil { // Verifica si el identificador ya está definido
-					v.errorList = append(v.errorList, "Error: Variable '"+identifiers[i].GetText()+"' already defined")
-				} else {
-					v.symbolTable.insert(identifiers[i], INT) // Inserta el identificador en la tabla de símbolos
-				}
-			} else {
-				v.errorList = append(v.errorList, "Error: "+identifiers[i].GetText()+" is not an integer") // Retorna un error si la expresión no es de tipo entero
-			}
-		}
-	case
-		"float":
-		for i, _ := range identifiers { // Recorre los identificadores
-			if exp[i].GetSymbol().GetTokenType() == FLOAT { // Verifica si la expresión es de tipo flotante
-				if v.symbolTable.search(identifiers[i].GetText()) != nil { // Verifica si el identificador ya está definido
-					v.errorList = append(v.errorList, "Error: Variable '"+identifiers[i].GetText()+"' already defined")
-				} else {
-					v.symbolTable.insert(identifiers[i], FLOAT) // Inserta el identificador en la tabla de símbolos
-				}
-			} else {
-				v.errorList = append(v.errorList, "Error: "+identifiers[i].GetText()+" is not a float") // Retorna un error si la expresión no es de tipo flotante
-			}
-		}
-	case "rune":
-		for i, _ := range identifiers { // Recorre los identificadores
-			if exp[i].GetSymbol().GetTokenType() == RUNE { // Verifica si la expresión es de tipo runa
-				if v.symbolTable.search(identifiers[i].GetText()) != nil { // Verifica si el identificador ya está definido
-					v.errorList = append(v.errorList, "Error: Variable '"+identifiers[i].GetText()+"' already defined")
-				} else {
-					v.symbolTable.insert(identifiers[i], RUNE) // Inserta el identificador en la tabla de símbolos
-				}
-			} else {
-				v.errorList = append(v.errorList, "Error: "+identifiers[i].GetText()+" is not a rune") // Retorna un error si la expresión no es de tipo runa
-			}
-		}
-	case "string":
-		for i, _ := range identifiers { // Recorre los identificadores
-			if exp[i].GetSymbol().GetTokenType() == STRING { // Verifica si la expresión es de tipo cadena
-				if v.symbolTable.search(identifiers[i].GetText()) != nil { // Verifica si el identificador ya está definido
-					v.errorList = append(v.errorList, "Error: Variable '"+identifiers[i].GetText()+"' already defined")
-				} else {
-					v.symbolTable.insert(identifiers[i], STRING) // Inserta el identificador en la tabla de símbolos
-				}
-			} else {
-				v.errorList = append(v.errorList, "Error: "+identifiers[i].GetText()+" is not a string") // Retorna un error si la expresión no es de tipo cadena
-			}
-		}
-	case "bool":
-		for i, _ := range identifiers { // Recorre los identificadores
-			if exp[i].GetSymbol().GetTokenType() == BOOL { // Verifica si la expresión es de tipo booleano
-				if v.symbolTable.search(identifiers[i].GetText()) != nil { // Verifica si el identificador ya está definido
-					v.errorList = append(v.errorList, "Error: Variable '"+identifiers[i].GetText()+"' already defined")
-				} else {
-					v.symbolTable.insert(identifiers[i], BOOL) // Inserta el identificador en la tabla de símbolos
-				}
-			} else {
-				v.errorList = append(v.errorList, "Error: "+identifiers[i].GetText()+" is not a boolean") // Retorna un error si la expresión no es de tipo booleano
-			}
-		}
-	default:
-		v.errorList = append(v.errorList, "Error: Type '"+tp+"' not defined") // Retorna un error si el tipo no está definido
-	}
-
-	v.symbolTable.printTable() // Imprime la tabla de símbolos
-
-	return nil
-}
+//------------------------------------
 
 func (tc *TypeChecker) VisitIdListSVDAST(ctx *parser.IdListSVDASTContext) interface{} {
 	identifierList := tc.Visit(ctx.IdentifierList()).([]antlr.TerminalNode)
@@ -418,7 +340,7 @@ func (tc *TypeChecker) VisitIdListSVDAST(ctx *parser.IdListSVDASTContext) interf
 			}
 		}
 	}
-	tc.symbolTable.printTable()
+	//tc.symbolTable.printTable()
 	return nil
 }
 
@@ -439,6 +361,8 @@ func (tc *TypeChecker) VisitSingleVarDeclNoExpsAST(ctx *parser.SingleVarDeclNoEx
 			switch declType.GetText() {
 			case "int":
 				tc.symbolTable.insert(id, INT)
+				fmt.Println("(singleVarDeclNoExp) Se insertó em la tabla de simbolos: ", id)
+				tc.symbolTable.printTable()
 			case "rune":
 				tc.symbolTable.insert(id, RUNE)
 			case "bool":
@@ -452,6 +376,7 @@ func (tc *TypeChecker) VisitSingleVarDeclNoExpsAST(ctx *parser.SingleVarDeclNoEx
 			}
 		}
 	}
+	tc.symbolTable.printTable()
 
 	switch declType.GetText() {
 	case "int":
@@ -466,7 +391,7 @@ func (tc *TypeChecker) VisitSingleVarDeclNoExpsAST(ctx *parser.SingleVarDeclNoEx
 		return FLOAT
 	}
 
-	tc.symbolTable.printTable()
+	//tc.symbolTable.printTable()
 
 	return nil
 }
@@ -592,6 +517,7 @@ func (tc *TypeChecker) VisitLpDTAST(ctx *parser.LpDTASTContext) interface{} {
 
 func (tc *TypeChecker) VisitIdDTAST(ctx *parser.IdDTASTContext) interface{} {
 	var list = ctx.ID().(antlr.TerminalNode)
+	//fmt.Println("Retorno en idDTAST: ", list)
 	return list
 }
 
@@ -628,9 +554,6 @@ func (tc *TypeChecker) VisitStructSDTAST(ctx *parser.StructSDTASTContext) interf
 		//fields = tc.Visit(ctx.StructMemDecls()).([]int)
 	}
 
-	//Se inserta el struct en la tabla de símbolos
-	//tc.symbolTable.insertStructIdent(ctx.STRUCT().(antlr.TerminalNode), fields)
-
 	//Imprime la tabla de símbolos
 	tc.symbolTable.printTable()
 	return ctx.STRUCT().(antlr.TerminalNode)
@@ -650,102 +573,198 @@ func (tc *TypeChecker) VisitIdentifierListAST(ctx *parser.IdentifierListASTConte
 	for i, _ := range ctx.AllID() {
 		list = append(list, ctx.ID(i).(antlr.TerminalNode))
 	}
+	//fmt.Println("Retorno en identifierListAST: ", list)
 
 	return list
 }
 func (tc *TypeChecker) VisitPrimaryExpressionEAST(ctx *parser.PrimaryExpressionEASTContext) interface{} {
+
+	//fmt.Println("Retorno en PrimaryExpressionEAST: ", expression)
 	return tc.Visit(ctx.PrimaryExpression())
 }
-func (tc *TypeChecker) VisitExpressionEAST(ctx *parser.ExpressionEASTContext) interface{} {
 
+// ---------------------Funciones para convertir tipos INT, STRING, FLOAT a TerminalNode------------------------------
+func CreateTerminalNodeFromInt(value int) antlr.TerminalNode {
+	// Convert the integer to a string
+	input := fmt.Sprintf("%d", value)
+
+	// Create a CharStream from the string
+	charStream := antlr.NewInputStream(input)
+
+	// Create a lexer instance
+	lexer := parser.NewgoScanner(charStream)
+
+	// Get the first token (which should be the integer)
+	token := lexer.NextToken()
+
+	// Create a TerminalNodeImpl from the token
+	return antlr.NewTerminalNodeImpl(token)
+}
+func CreateTerminalNodeFromString(value string) antlr.TerminalNode {
+	// Add double quotes around the string to match the STRING token rule
+	input := fmt.Sprintf("\"%s\"", value)
+
+	// Create a CharStream from the string
+	charStream := antlr.NewInputStream(input)
+
+	// Create a lexer instance
+	lexer := parser.NewgoScanner(charStream)
+
+	// Get the first token (which should be the string)
+	token := lexer.NextToken()
+
+	// Create a TerminalNodeImpl from the token
+	return antlr.NewTerminalNodeImpl(token)
+}
+func CreateTerminalNodeFromFloat(value float64) antlr.TerminalNode {
+	// Convert the float to a string
+	input := fmt.Sprintf("%f", value)
+
+	// Create a CharStream from the string
+	charStream := antlr.NewInputStream(input)
+
+	// Create a lexer instance
+	lexer := parser.NewgoScanner(charStream)
+
+	// Get the first token (which should be the float)
+	token := lexer.NextToken()
+
+	// Create a TerminalNodeImpl from the token
+	return antlr.NewTerminalNodeImpl(token)
+}
+
+func (tc *TypeChecker) VisitExpressionEAST(ctx *parser.ExpressionEASTContext) interface{} {
 	exp1 := tc.Visit(ctx.Expression(0)).(antlr.TerminalNode)
-	//TODO: HACER LA VERIFICACION DE TIPOS
 	exp2 := tc.Visit(ctx.Expression(1)).(antlr.TerminalNode)
 
-	var tipo1 int = exp1.GetSymbol().GetTokenType()
-	var tipo2 int = exp2.GetSymbol().GetTokenType()
+	tipo1 := exp1.GetSymbol().GetTokenType()
+	tipo2 := exp2.GetSymbol().GetTokenType()
 
-	if exp1.GetSymbol().GetTokenType() == 65 && exp1.GetSymbol().GetText() != "true" && exp1.GetSymbol().GetText() != "false" {
-		if tc.symbolTable.search(exp1.GetText()) == nil {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("Variable %s no declarada en la linea %d:%d", exp1.GetText(), exp1.GetSymbol().GetLine(), exp1.GetSymbol().GetColumn()))
-			return nil //ya no se retorna nada
-		} else {
-			tipo1 = tc.symbolTable.search(exp1.GetText()).(*VarIdent).typ
-		}
+	if tc.symbolTable.searchVarInCurrentLevel(exp1.GetText()) == nil {
+		fmt.Println("No está en la tabla de simbolos")
+	} else {
+		fmt.Println("Está en la tabla de simbolos")
+		//validar el tipo de la expresion
+
+		//exp := tc.symbolTable.searchVarInCurrentLevel(exp1.GetText()).(*VarIdent)
+
 	}
-
-	if exp2.GetSymbol().GetTokenType() == 65 && exp2.GetSymbol().GetText() != "true" && exp2.GetSymbol().GetText() != "false" {
-		if tc.symbolTable.search(exp2.GetText()) == nil {
-			tc.errorList = append(tc.errorList, fmt.Sprintf("Variable %s no declarada en la linea %d:%d", exp2.GetText(), exp2.GetSymbol().GetLine(), exp2.GetSymbol().GetColumn()))
-			return nil //ya no se retorna nada
-		} else {
-			tipo2 = tc.symbolTable.search(exp2.GetText()).(*VarIdent).typ
-		}
+	if tc.symbolTable.searchVarInCurrentLevel(exp2.GetText()) == nil {
+		fmt.Println("No está en la tabla de simbolos")
+	} else {
+		fmt.Println("Está en la tabla de simbolos")
 	}
 
 	if tipo1 == tipo2 {
-		if ctx.MUL() != nil ||
-			ctx.DIV() != nil ||
-			ctx.MIN() != nil {
-			if tipo1 == INT || tipo1 == FLOAT || tipo1 == RUNE {
-				return tipo1
-			} else {
-				tc.errorList = append(tc.errorList, fmt.Sprintf("El operador no es válido para el tipo de dato de %s en la linea %d:%d", exp1.GetText(), exp1.GetSymbol().GetLine(), exp1.GetSymbol().GetColumn()))
-				return nil
+		switch tipo1 {
+		case 77:
+			valInt1, err1 := strconv.Atoi(exp1.GetText())
+			valInt2, err2 := strconv.Atoi(exp2.GetText())
+			if err1 != nil && err2 != nil {
+				fmt.Println("Error: Los valores de la expresión no se pudieron convertir a int")
 			}
-		} else if ctx.MOD() != nil ||
-			ctx.AMPER() != nil ||
-			ctx.VB() != nil ||
-			ctx.CARET() != nil {
-			if tipo1 == INT || tipo1 == RUNE {
-				return tipo1
-			} else {
-				tc.errorList = append(tc.errorList, fmt.Sprintf("El operador no es válido para el tipo de dato de %s en la linea %d:%d", exp1.GetText(), exp1.GetSymbol().GetLine(), exp1.GetSymbol().GetColumn()))
-				return nil
-			}
-		} else if ctx.LT() != nil ||
-			ctx.GT() != nil ||
-			ctx.BC() != nil {
-			if tipo1 == INT {
-				return tipo1
-			} else {
-				tc.errorList = append(tc.errorList, fmt.Sprintf("El operador no es válido para el tipo de dato de %s en la linea %d:%d", exp1.GetText(), exp1.GetSymbol().GetLine(), exp1.GetSymbol().GetColumn()))
-				return nil
-			}
-		} else if ctx.PL() != nil {
-			if tipo1 == INT || tipo1 == FLOAT || tipo1 == RUNE || tipo1 == STRING {
-				return tipo1
-			} else {
-				tc.errorList = append(tc.errorList, fmt.Sprintf("El operador no es válido para el tipo de dato de %s en la linea %d:%d", exp1.GetText(), exp1.GetSymbol().GetLine(), exp1.GetSymbol().GetColumn()))
-				return nil
-			}
-		} else if ctx.EQ() != nil ||
-			ctx.NEQ() != nil ||
-			ctx.LT() != nil ||
-			ctx.LTE() != nil ||
-			ctx.GT() != nil ||
-			ctx.GTE() != nil ||
-			ctx.LAND() != nil ||
-			ctx.LOR() != nil {
-			return 65
-		}
-	} else {
-		tc.errorList = append(tc.errorList, fmt.Sprintf("Tipos de las expresiones %s y %s no son iguales en la linea %d:%d", exp1.GetText(), exp2.GetText(), exp1.GetSymbol().GetLine(), exp1.GetSymbol().GetColumn()))
-	}
+			if ctx.PL() != nil {
 
+				result := valInt1 + valInt2                    //suma las dos expresiones, pero son de tipo int
+				resultado := CreateTerminalNodeFromInt(result) //convierte el resultado a tipo antlr.TerminalNode
+				fmt.Println("resultado: ", resultado)
+				return resultado
+
+			} else if ctx.MIN() != nil {
+				result := valInt1 - valInt2
+				resultado := CreateTerminalNodeFromInt(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else if ctx.MUL() != nil {
+				result := valInt1 * valInt2
+				resultado := CreateTerminalNodeFromInt(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else if ctx.DIV() != nil {
+				result := valInt1 / valInt2
+				resultado := CreateTerminalNodeFromInt(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else if ctx.MOD() != nil {
+				result := valInt1 % valInt2
+				resultado := CreateTerminalNodeFromInt(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else {
+				fmt.Println("La Operación no se puede realizar")
+			}
+		case 78:
+			valFloat1, err1 := strconv.ParseFloat(exp1.GetText(), 78)
+			valFloat2, err2 := strconv.ParseFloat(exp2.GetText(), 78)
+			if err1 != nil && err2 != nil {
+				// Manejo del error
+				fmt.Println("Error: Los valores de la expresión no se pudieron convertir a float64")
+			}
+			if ctx.PL() != nil {
+				result := valFloat1 + valFloat2
+				fmt.Println("resultado: ", result)
+				resultado := CreateTerminalNodeFromFloat(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else if ctx.MIN() != nil {
+				result := valFloat1 - valFloat2
+				resultado := CreateTerminalNodeFromFloat(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else if ctx.MUL() != nil {
+				result := valFloat1 * valFloat2
+				resultado := CreateTerminalNodeFromFloat(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else if ctx.DIV() != nil {
+				result := valFloat1 / valFloat2
+				resultado := CreateTerminalNodeFromFloat(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else {
+				fmt.Println("La Operación no se puede realizar")
+			}
+		case 81:
+			//extrae los valores sin dobles comillas dobles
+			valString1 := strings.Trim(exp1.GetText(), "\"")
+			valString2 := strings.Trim(exp2.GetText(), "\"")
+			fmt.Println(valString2, valString1)
+			if ctx.PL() != nil {
+				result := valString1 + " " + valString2
+				resultado := CreateTerminalNodeFromString(result)
+				fmt.Println("Resultado de la operación: ", resultado)
+				return resultado
+			} else {
+				fmt.Println("La Operación no se puede realizar")
+			}
+
+		case 79:
+			fmt.Println("La operación no se puede realizar con el tipo de dato rune o char, debido a que " +
+				"sería un tipo string y no coincide con el tipo de la variable")
+
+		}
+
+	} else {
+		fmt.Println("La expresion presenta un tipo de dato no permitido para realizar la operación")
+
+	}
 	return nil
 }
+
 func (tc *TypeChecker) VisitOperatorEAST(ctx *parser.OperatorEASTContext) interface{} {
 	//TODO: HACER LA VERIFICACION DE TIPOS
 	tc.Visit(ctx.Expression())
 	return nil
 }
+
 func (tc *TypeChecker) VisitExpressionListAST(ctx *parser.ExpressionListASTContext) interface{} {
+
 	var list []antlr.TerminalNode
 	for i := 0; i < len(ctx.AllExpression()); i++ {
 		list = append(list, tc.Visit(ctx.Expression(i)).(antlr.TerminalNode))
 
 	}
+	fmt.Println("ExpressionListAST (deberia dar el resultado de la operación): ", list)
 	return list
 
 }
@@ -826,7 +845,18 @@ func (tc *TypeChecker) VisitAppendExpressionAST(ctx *parser.AppendExpressionASTC
 	return nil
 }
 func (tc *TypeChecker) VisitLengthExpressionAST(ctx *parser.LengthExpressionASTContext) interface{} {
-	tc.Visit(ctx.Expression())
+	exp := tc.Visit(ctx.Expression())
+	fmt.Println("LengthExpressionAST: ", exp)
+
+	//valida si exp está en la tabla de simbolos
+	if tc.symbolTable.searchVarInCurrentLevel(exp.(antlr.TerminalNode).GetText()) == nil {
+		fmt.Println("No está en la tabla de simbolos")
+	} else {
+		fmt.Println("Está en la tabla de simbolos")
+		//saca el valor de la expresion de la tabla de simbolos para validar el largo
+
+	}
+
 	return nil
 }
 func (tc *TypeChecker) VisitCapExpressionAST(ctx *parser.CapExpressionASTContext) interface{} {
